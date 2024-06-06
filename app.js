@@ -45,9 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     toolElement.classList.add('result-item');
                     toolElement.innerHTML = `
                         <img src="${tool.imagem}" alt="${tool.nome}">
-                        <h3>${tool.nome}</h3>
-                        <p>${tool.descricao}</p>
-                        <a href="${tool.link}" target="_blank">Acessar</a>
+                        <div class="result-item-content">
+                            <h3>${tool.nome}</h3>
+                            <p>${tool.descricao}</p>
+                            <a href="${tool.link}" target="_blank">Acessar</a>
+                        </div>
                     `;
                     resultsContainer.appendChild(toolElement);
                 });
