@@ -4,7 +4,7 @@ export const SearchBarContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  align-items: stretch;
 `;
 
 export const SearchInput = styled.input`
@@ -16,7 +16,5 @@ export const SearchInput = styled.input`
 
   @media (max-width: 600px) {
     width: 90%;
-    margin-right: 0;
-    margin-bottom: 10px;
   }
 `;

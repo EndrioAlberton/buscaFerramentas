@@ -4,7 +4,7 @@ export const CategoriesContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  align-items: stretch; /* Força os filhos a terem a mesma altura */
 
   @media (max-width: 600px) {
     flex-direction: column;
