@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import  { GlobalStyles, ResultsContainer } from './GlobalStyles';
+import  { AppContainer, GlobalStyles, Main, ResultsContainer, Search } from './GlobalStyles';
 
 import SearchBar from './components/SearchBar';
 import SearchButton from './components/SearchButton';
 import CategorySelect from './components/CategorySelect';
 import ToolCard from './components/ToolCard';
+import { HeaderContainer } from './components/Header/styles';
 
 interface Tool {
   nome: string;
@@ -49,17 +50,22 @@ const App: React.FC = () => {
   }, [query, category, data]);
 
   return (
-    <div>
+    <AppContainer>
+      <HeaderContainer/>
       <GlobalStyles />
-      <SearchBar query={query} setQuery={setQuery} />
-      <CategorySelect category={category} setCategory={setCategory} />
-      <SearchButton onClick={() => setQuery(query)} />
-      <ResultsContainer id="results">
-        {filteredData.map(tool => (
-          <ToolCard key={tool.nome} tool={tool} />
-        ))}
-      </ResultsContainer>
-    </div>
+      <Main>
+        <Search>
+          <SearchBar query={query} setQuery={setQuery} />
+          <CategorySelect category={category} setCategory={setCategory} />
+          <SearchButton onClick={() => setQuery(query)} />
+        </Search>
+        <ResultsContainer id="results">
+          {filteredData.map(tool => (
+            <ToolCard key={tool.nome} tool={tool} />
+          ))}
+        </ResultsContainer>
+      </Main>
+    </AppContainer>
   );
 };
 
