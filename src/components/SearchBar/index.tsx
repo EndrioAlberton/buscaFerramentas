@@ -1,3 +1,4 @@
+import React from "react";
 import { SearchBarContainer, SearchInput } from "./styles";
 
 interface SearchBarProps {
