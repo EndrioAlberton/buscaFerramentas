@@ -1,43 +1,310 @@
 [
-    {
-      "id": 1,
-      "nome": "Khan Academy",
-      "descricao": "Plataforma de aprendizado gratuito para várias disciplinas.",
-      "categorias": ["Geral"],
-      "link": "https://www.khanacademy.org",
-      "imagem": "https://i.pcmag.com/imagery/reviews/07AxdIVbQ63OEkJoPgCybXt-19.fit_scale.size_1028x578.v1594914797.png"
-    },
-    {
-      "id": 2,
-      "nome": "GeoGebra",
-      "descricao": "Ferramenta de matemática dinâmica.",
-      "categorias": ["Matemática"],
-      "link": "https://www.geogebra.org",
-      "imagem": "https://s.cafebazaar.ir/images/icons/org.geogebra-9f3fdf85-2dc0-40b8-926b-00d1ca7271b2_512x512.png?x-img=v1/format,type_webp,lossless_false/resize,h_256,w_256,lossless_false/optimize"
-    },
-    {
-      "id": 3,
-      "nome": "Duolingo",
-      "descricao": "Aplicativo para aprender idiomas de forma divertida.",
-      "categorias": ["Língua Inglesa"],
-      "link": "https://www.duolingo.com",
-      "imagem": "https://i.pinimg.com/originals/52/b4/20/52b42001bcc7a0cb013c97eeb3ead223.jpg"
-    },
-    {
-      "id": 4,
-      "nome": "PhET Interactive Simulations",
-      "descricao": "Simulações interativas para ensinar ciências e matemática.",
-      "categorias": ["Física", "Química", "Biologia", "Matemática"],
-      "link": "https://phet.colorado.edu",
-      "imagem": "https://i.pinimg.com/564x/57/a1/89/57a18926de3e6a4d7c2320ade35e0367.jpg"
-    },
-    {
-      "id": 5,
-      "nome": "Quizlet",
-      "descricao": "Ferramenta de estudo com flashcards e jogos de aprendizado.",
-      "categorias": ["Geral"],
-      "link": "https://quizlet.com",
-      "imagem": "https://i.pinimg.com/564x/79/f9/fa/79f9fa04f11e55f76e59f9b0a5f84711.jpg"
-    }
-  ]
-  
+  {
+    "id": 1,
+    "nome": "Renderforest",
+    "descricao": "Criadora de vídeos, sites, logos, mockups e gráficos com aplicação de IA.",
+    "categorias": [
+      "Vídeos"
+    ],
+    "link": "https://www.renderforest.com/pt",
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/1/19/Renderforest.png",
+    "vantagens": [
+      "Possível acesso de forma gratuita - mas limitado.",
+      "Pode ser acessado em português.",
+      "Interface intuitiva - acessível para quem tem pouco ou nenhum conhecimento na criação de vídeos.",
+      "Assistindo a apenas um vídeo explicativo já se consegue utilizar a ferramenta.",
+      "Modelos pré-prontos em 2D e 3D.",
+      "O professor pode criar vídeos explicativos, animados, incluindo explicações com a sua própria voz para facilitar a compreensão dos conteúdos mais complexos.",
+      "Pode ser utilizado para slides e infográficos interativos.",
+      "O material pode ser baixado e acessado sem internet."
+    ],
+    "limitações": [
+      "Limitações da versão gratuita: marca d'água em todos os vídeos, restrição no tempo e na qualidade dos vídeos.",
+      "Não é possível editar os personagens (movimentos, vestimenta, etc.), pois os modelos são pré-definidos.",
+      "A performance da ferramenta pode ser afetada dependendo do navegador utilizado e da velocidade da internet."
+    ]
+  },
+  {
+    "id": 2,
+    "nome": "Playposit",
+    "descricao": "Criação de vídeos educacionais interativos para estimular o aprendizado dos alunos.",
+    "categorias": [
+      "Vídeos"
+    ],
+    "link": "https://www.playpos.it/",
+    "imagem": "https://images.squarespace-cdn.com/content/5c9bd26d92441ba9c1cfb631/1554413217429-7DKH2CT6IN549K5ESVXH/playposit_headerimage_email_my7qnz.png?content-type=image%2Fpng",
+    "vantagens": [
+      "Criação de uma conta gratuita para professores, mas limitada.",
+      "Pode ser traduzido para o português.",
+      "Permite a criação de vídeos interativos com inserção de questões diversas.",
+      "O professor pode escolher em qual parte do vídeo quer inserir a interatividade.",
+      "Permite ao professor emitir feedback personalizado do progresso do aluno.",
+      "Integra-se com plataformas de aprendizagem como Google Classroom e Moodle."
+    ],
+    "limitações": [
+      "Como os vídeos são acessados online, pode dificultar o acesso de alguns alunos."
+    ]
+  },
+  {
+    "id": 3,
+    "nome": "Powtoon",
+    "descricao": "Criação de vídeos explicativos e animados e apresentações com foco em simplicidade e usabilidade para não designers.",
+    "categorias": [
+      "Vídeos"
+    ],
+    "link": "https://www.powtoon.com/pt",
+    "imagem": "https://cdn.freelogovectors.net/wp-content/uploads/2020/12/powtoon-logo.png",
+    "vantagens": [
+      "Interface intuitiva, fácil de usar.",
+      "Variedade de templates que podem ser personalizados.",
+      "Pode ser traduzido para o português.",
+      "Recursos de animação que permitem movimento na apresentação de vídeos.",
+      "A ferramenta permite a colaboração em equipe.",
+      "Compatível com várias plataformas como YouTube e Facebook."
+    ],
+    "limitações": [
+      "A versão gratuita é limitada e as versões pagas têm um custo alto.",
+      "A versão gratuita possui marca d'água.",
+      "Dependência de internet."
+    ]
+  },
+  {
+    "id": 4,
+    "nome": "Wordwall",
+    "descricao": "Criação de jogos pedagógicos para fixar o conteúdo, de forma rápida e simples.",
+    "categorias": [
+      "Jogos"
+    ],
+    "link": "https://wordwall.net/",
+    "imagem": "https://seeklogo.com/images/W/wordwall-logo-3918BB3625-seeklogo.com.png",
+    "vantagens": [
+      "Interface intuitiva, não requer conhecimentos prévios.",
+      "Permite compartilhamento e colaboração entre docentes.",
+      "Possui uma ampla gama de tipos de atividades: quizzes, sopa letras, cruzadinhas, entre outros.",
+      "O aluno recebe feedback de acerto ou erro.",
+      "Possibilidade de adaptar as atividades para diferentes faixas etárias.",
+      "Versões de atividades para impressão."
+    ],
+    "limitações": [
+      "A versão gratuita é limitada a 5 atividades/jogos por cadastro."
+    ]
+  },
+  {
+    "id": 5,
+    "nome": "Canva",
+    "descricao": "Ferramenta multifuncional online de design gráfico que permite a criação de apresentações interativas, vídeos e infográficos.",
+    "categorias": [
+      "Design",
+      "Apresentações"
+    ],
+    "link": "https://www.canva.com.br",
+    "imagem": "https://cdn.freelogovectors.net/wp-content/uploads/2023/04/canva-logo-circle-freelogovectors.net_.png",
+    "vantagens": [
+      "Interface intuitiva e amigável.",
+      "Permite a criação de projetos diversos.",
+      "Oferece uma ampla biblioteca de templates.",
+      "Utiliza a IA para oferecer funcionalidades avançadas.",
+      "Possui uma grande biblioteca de imagens gratuitas.",
+      "Permite a colaboração em tempo real."
+    ],
+    "limitações": [
+      "Dependência da internet.",
+      "Necessário a criação de conta para utilizar.",
+      "Na versão gratuita, a exportação de projetos robustos pode perder qualidade.",
+      "Funcionalidade de Brand Kit disponível apenas na versão paga."
+    ]
+  },
+  {
+    "id": 6,
+    "nome": "Genially",
+    "descricao": "Ferramenta online de design gráfico focada em conteúdos interativos.",
+    "categorias": [
+      "Design",
+      "Interatividade"
+    ],
+    "link": "https://www.genially.com",
+    "imagem": "https://seeklogo.com/images/G/genially-logo-347C736FDC-seeklogo.com.png",
+    "vantagens": [
+      "Interface intuitiva e fácil de usar.",
+      "Permite a criação de projetos diversos com interatividade avançada.",
+      "Versão gratuita limitada.",
+      "Oferece análise de desempenho do conteúdo.",
+      "Permite a colaboração em tempo real."
+    ],
+    "limitações": [
+      "Dependência da internet.",
+      "Necessário a criação de conta para utilizar.",
+      "A versão gratuita é limitada.",
+      "Integrações limitadas."
+    ]
+  },
+  {
+    "id": 7,
+    "nome": "Visme",
+    "descricao": "Ferramenta para criação de apresentações, infográficos e documentos visuais.",
+    "categorias": [
+      "Design",
+      "Apresentações"
+    ],
+    "link": "https://www.visme.com",
+    "imagem": "https://w7.pngwing.com/pngs/261/778/png-transparent-visme-horizontal-logo-tech-companies.png",
+    "vantagens": [
+      "Interface intuitiva, mas mais difícil para iniciantes.",
+      "Permite a criação de projetos diversos.",
+      "Versão gratuita limitada.",
+      "Permite a colaboração em tempo real."
+    ],
+    "limitações": [
+      "Dependência da internet.",
+      "Necessário a criação de conta para utilizar.",
+      "Uso restrito em dispositivos móveis."
+    ]
+  },
+  {
+    "id": 8,
+    "nome": "Kahoot",
+    "descricao": "Plataforma popular de aprendizado baseada em jogos.",
+    "categorias": [
+      "Jogos",
+      "Aprendizado"
+    ],
+    "link": "https://www.kahoot.com",
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Kahoot_Logo.svg",
+    "vantagens": [
+      "Plataforma intuitiva para criar quizzes.",
+      "Possui versão gratuita geralmente suficiente.",
+      "Permite participação ativa dos alunos.",
+      "Feedback instantâneo para os alunos."
+    ],
+    "limitações": [
+      "A versão offline é limitada.",
+      "Necessita uma conexão de internet estável."
+    ]
+  },
+  {
+    "id": 9,
+    "nome": "Unity",
+    "descricao": "Ferramenta para criação de jogos 2D e 3D.",
+    "categorias": [
+      "Jogos",
+      "Desenvolvimento"
+    ],
+    "link": "https://unity.com/pt",
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/1/19/Unity_Technologies_logo.svg",
+    "vantagens": [
+      "Interface amigável e acessível.",
+      "Versão básica gratuita.",
+      "Permite experiências de VR e AR.",
+      "Estimula a criatividade."
+    ],
+    "limitações": [
+      "Custo significativo para versões pagas.",
+      "Requer computadores relativamente poderosos."
+    ]
+  },
+  {
+    "id": 10,
+    "nome": "Scratch",
+    "descricao": "Linguagem de programação criada pelo MIT Media Lab para crianças e iniciantes.",
+    "categorias": [
+      "Programação",
+      "Educação"
+    ],
+    "link": "https://scratch.mit.edu/",
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Scratchlogo.svg/1920px-Scratchlogo.svg.png",
+    "vantagens": [
+      "Design intuitivo com foco na criatividade.",
+      "Permite a criação de jogos educativos simples.",
+      "Possui uma grande comunidade online.",
+      "Oferece recursos educacionais e tutoriais."
+    ],
+    "limitações": [
+      "Funcionalidades limitadas offline.",
+      "Limitado para projetos mais avançados."
+    ]
+  },
+  {
+    "id": 11,
+    "nome": "Padlet",
+    "descricao": "Mural digital que permite o compartilhamento de ideias.",
+    "categorias": [
+      "Colaboração",
+      "Organização"
+    ],
+    "link": "https://www.padlet.com",
+    "imagem": "https://iconape.com/wp-content/png_logo_vector/padlet-logo.png",
+    "vantagens": [
+      "Facilita a distribuição de tarefas entre grupos.",
+      "Participantes não precisam ter conta.",
+      "Versátil para diferentes tarefas.",
+      "Suporta diversos tipos de conteúdo."
+    ],
+    "limitações": [
+      "Dependência de internet.",
+      "Limitação da versão gratuita."
+    ]
+  },
+  {
+    "id": 12,
+    "nome": "Miro",
+    "descricao": "Ferramenta semelhante ao Padlet, porém com mais recursos.",
+    "categorias": [
+      "Colaboração",
+      "Organização"
+    ],
+    "link": "https://www.miro.com",
+    "imagem": "https://cdn.worldvectorlogo.com/logos/miro-2.svg",
+    "vantagens": [
+      "Várias funcionalidades e templates.",
+      "Permite colaboração em tempo real.",
+      "Integra-se com várias outras ferramentas.",
+      "Interface intuitiva."
+    ],
+    "limitações": [
+      "Dependência de internet.",
+      "Versão gratuita limitada."
+    ]
+  },
+  {
+    "id": 13,
+    "nome": "MindMeister",
+    "descricao": "Ferramenta de mapeamento mental que auxilia na organização de ideias.",
+    "categorias": [
+      "Organização",
+      "Pensamento Visual"
+    ],
+    "link": "https://www.mindmeister.com",
+    "imagem": "https://seeklogo.com/images/M/mindmeister-logo-454DBF2AB2-seeklogo.com.png?v=638379982610000000",
+    "vantagens": [
+      "Ótima interface e visualização.",
+      "Permite colaboração em tempo real.",
+      "Apoia diferentes estilos de aprendizagem.",
+      "Versão gratuita disponível."
+    ],
+    "limitações": [
+      "Versão gratuita com funcionalidades limitadas.",
+      "Dependência de internet."
+    ]
+  },
+  {
+    "id": 14,
+    "nome": "Trello",
+    "descricao": "Plataforma de gerenciamento de tarefas que permite a organização visual.",
+    "categorias": [
+      "Gerenciamento",
+      "Organização"
+    ],
+    "link": "https://trello.com/",
+    "imagem": "https://upload.wikimedia.org/wikipedia/en/8/8c/Trello_logo.svg",
+    "vantagens": [
+      "Interface intuitiva.",
+      "Permite personalização das tarefas.",
+      "Colaboração em tempo real.",
+      "Versão gratuita disponível."
+    ],
+    "limitações": [
+      "Dependência de internet.",
+      "Limitações na versão gratuita."
+    ]
+  }
+]
