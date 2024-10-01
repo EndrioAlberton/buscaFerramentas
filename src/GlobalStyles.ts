@@ -17,8 +17,8 @@ export const Main = styled.main`
 export const Search = styled.div`
   margin: 10px;
   display: flex;
-  justify-content: center; /* Align items horizontally */
-  align-items: center; /* Align items vertically 
+  justify-content: center; 
+  align-items: center;
   `;
 
 export const ResultsContainer = styled.div`

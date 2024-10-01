@@ -8,7 +8,6 @@ interface CategorySelectProps {
 
 const CategorySelect: React.FC<CategorySelectProps> = ({ category, setCategory }) => {
     return (
-      <CategoriesContainer>
         <Select
           id="category-select"
           value={category}
@@ -28,7 +27,6 @@ const CategorySelect: React.FC<CategorySelectProps> = ({ category, setCategory }
           <option value="História">História</option>
           <option value="Sociologia">Sociologia</option>
         </Select>
-      </CategoriesContainer>
     );
   };
   

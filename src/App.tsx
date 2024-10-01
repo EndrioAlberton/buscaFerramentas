@@ -8,7 +8,7 @@ import { HeaderContainer } from './components/Header/styles';
 import { readTools } from './services/dataAccess/ferramentasAccess';
 
 interface Tool {
-  id: string; // Ajuste o tipo para string se o ID for uma string
+  id: string;
   nome: string;
   descricao: string;
   link: string;
