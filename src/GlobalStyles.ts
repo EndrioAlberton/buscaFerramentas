@@ -1,10 +1,11 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const AppContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #f0f0f0; 
 `;
 
 export const Main = styled.main`
@@ -19,7 +20,7 @@ export const Search = styled.div`
   display: flex;
   justify-content: center; 
   align-items: center;
-  `;
+`;
 
 export const ResultsContainer = styled.div`
   display: flex;
@@ -29,14 +30,9 @@ export const ResultsContainer = styled.div`
 
 export const GlobalStyles = createGlobalStyle`
   body {
-    width: 100vw;
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0;
   }
 `;
-
