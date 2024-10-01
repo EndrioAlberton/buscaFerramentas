@@ -1,8 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const AppContainer = styled.div`
-  width: 100%;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #f0f0f0; 
@@ -13,6 +11,7 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  min-weight: 100vw;
 `;
 
 export const Search = styled.div`

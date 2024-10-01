@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
-	box-sizing: border-box; 
-  width: 100%;
+  box-sizing: border-box; 
   background-color: #282c34;
   color: white;
-  padding: 20px;
   text-align: center;
+  min-height: 40px;
 
   h1 {
     margin: 0;
