@@ -5,17 +5,18 @@ export const CardContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 300px;
-  margin: 20px;
-  position: relative; /* Necessário para o posicionamento do footer */
+  width: 280px;
+  margin: 0 25px 25px 25px;
+  position: relative;
 `;
 
 export const CardHeader = styled.div`
   img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
+    width: 90%;
+    height: 150px;
+    object-fit: contain;
+    object-position: center;
+    padding: 10px;
 `;
 
 export const CardBody = styled.div`
@@ -24,7 +25,7 @@ export const CardBody = styled.div`
   flex-direction: column;
   align-items: start;
   position: relative;
-  min-height: 250px; 
+  height: 160px; 
 `;
 
 export const CategoriesContainer = styled.div`
@@ -56,9 +57,9 @@ export const CardDescription = styled.p`
 
 export const CardFooter = styled.div`
   position: absolute;
-  bottom: 10px; /* Define uma distância do fundo do card */
+  bottom: 10px;
   left: 50%;
-  transform: translateX(-50%); /* Centraliza horizontalmente */
+  transform: translateX(-50%);
   width: 100%;
   display: flex;
   justify-content: center;
