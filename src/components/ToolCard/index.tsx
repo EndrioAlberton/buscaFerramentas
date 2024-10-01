@@ -1,15 +1,5 @@
 import React from 'react';
-import { 
-  CardContainer, 
-  CardHeader, 
-  CardBody, 
-  CardTitle, 
-  CardDescription, 
-  CardLink, 
-  Category, 
-  CategoriesContainer, 
-  CardFooter 
-} from './styles';
+import { CardContainer, CardHeader, CardBody, CardTitle, CardDescription, CardLink, Category, CategoriesContainer, CardFooter } from './styles';
 
 interface ToolCardProps {
   tool: {
