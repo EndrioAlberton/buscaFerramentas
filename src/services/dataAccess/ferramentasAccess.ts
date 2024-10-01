@@ -1,12 +1,12 @@
 import { db } from '../../firebaseConfig';
-import data from '../tools.json'; // Caminho para o arquivo JSON
+import data from '../tools.json'; 
 
 const toolsCollection = db.collection('tools');
 
 export const addTools = async () => {
   for (const tool of data) {
     try {
-      const querySnapshot = await toolsCollection.where('nome', '==', tool.nome).get();
+      const querySnapshot = await toolsCollection.where('id', '==', tool.id).get();
       
       if (querySnapshot.empty) {
         await toolsCollection.add(tool);
@@ -19,6 +19,7 @@ export const addTools = async () => {
     }
   }
 };
+
 
 export const readTools = async () => {
   const snapshot = await toolsCollection.get();
