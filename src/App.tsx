@@ -57,7 +57,6 @@ const App: React.FC = () => {
         <Search>
           <SearchBar query={query} setQuery={setQuery} />
           <CategorySelect category={category} setCategory={setCategory} />
-          <SearchButton onClick={() => setQuery(query)} />
         </Search>
         <ResultsContainer id="results">
           {filteredData.map(tool => (

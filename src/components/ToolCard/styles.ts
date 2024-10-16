@@ -5,7 +5,7 @@ export const CardContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 280px;
+  width: 260px;
   margin: 0 25px 25px 25px;
   position: relative;
 `;
@@ -36,8 +36,8 @@ export const CategoriesContainer = styled.div`
 `;
 
 export const Category = styled.span`
-  background-color: #ccc;
-  color: #fff;
+  background-color: #6bbcea;
+  color: #282c34;
   border-radius: 50px;
   font-size: 12px;
   padding: 2px 10px;
@@ -46,10 +46,11 @@ export const Category = styled.span`
 
 export const CardTitle = styled.h4`
   margin: 10px 0;
+  font-size: 20px;
 `;
 
 export const CardDescription = styled.p`
-  font-size: 14px;
+  font-size: 16px;
   margin: 0 0 40px 0;
   font-weight: 500;
   color: rgb(70, 68, 68);

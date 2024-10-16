@@ -3,7 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 export const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #f0f0f0; 
+  background-color: #2f6b8e ; 
   min-width: 99.1vw;
   min-height: 100vh;
 `;
@@ -13,7 +13,7 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center;
   width: 100%;
-
+  
 `;
 
 export const Search = styled.div`
@@ -27,6 +27,8 @@ export const ResultsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 0px 40px 0px 40px;
+  .main { 5};
 `;
 
 export const GlobalStyles = createGlobalStyle`

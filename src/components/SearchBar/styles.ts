@@ -13,6 +13,8 @@ export const SearchInput = styled.input`
   width: 70%;
   max-width: 500px;
   margin-right: 10px;
+  border-radius: 15px;
+  border: 1px solid #282c34;
 
   @media (max-width: 600px) {
     width: 90%;
