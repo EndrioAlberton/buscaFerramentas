@@ -15,10 +15,10 @@ export const CategoriesContainer = styled.div`
 export const Select = styled.select`
   padding: 10px;
   font-size: 16px;
-  width: 200px;
+  width: 125px;
   border-radius: 15px;
   border: 1px solid #282c34;
-  appearance: none; /* Remove o estilo padrão */
+  appearance: none;
   background: white;
   outline: none;
 
