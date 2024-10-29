@@ -3,32 +3,29 @@ import styled, { createGlobalStyle } from 'styled-components';
 export const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #2f6b8e ; 
-  min-width: 99.1vw;
-  min-height: 100vh;
+  background-color: #2f6b8e; 
+  width: 100vw; 
+  height: 100vh; 
+  box-sizing: border-box; 
 `;
 
 export const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  
+  width: 100%;  /* Usa 100% da largura do contêiner pai */
+  height: 100%; /* Usa 100% da altura do contêiner pai */
+  padding: 0;   /* Remove padding, se houver */
+  margin: 0;    /* Remove margem, se houver */
+  box-sizing: border-box; /* Inclui padding e bordas nas dimensões */
 `;
 
 export const Search = styled.div`
-  margin: 10px;
+  margin: 10px; /* Você pode manter esta margem, mas tenha cuidado com o total */
   display: flex;
   justify-content: center; 
   align-items: center;
-`;
-
-export const ResultsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 0px 40px 0px 40px;
-  .main { 5};
+  width: 100%; /* Certifique-se de que não exceda a largura */
 `;
 
 export const GlobalStyles = createGlobalStyle`
@@ -47,7 +44,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    margin: 0;
+    margin: 0; v
     display: flex;
     place-items: center;
     min-width: 320px;

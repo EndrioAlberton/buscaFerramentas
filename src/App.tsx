@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { AppContainer, GlobalStyles, Main, ResultsContainer, Search } from './GlobalStyles';
+import { AppContainer, GlobalStyles, Main, Search } from './GlobalStyles';
 import SearchBar from './components/SearchBar';
-import SearchButton from './components/SearchButton';
 import CategorySelect from './components/CategorySelect';
 import ToolCard from './components/ToolCard';
 import { HeaderContainer } from './components/Header/styles';
 import { readTools } from './services/dataAccess/ferramentasAccess';
+import ResultContainer from './components/ResultContainer';
 
 interface Tool {
   id: string;
@@ -58,11 +58,9 @@ const App: React.FC = () => {
           <SearchBar query={query} setQuery={setQuery} />
           <CategorySelect category={category} setCategory={setCategory} />
         </Search>
-        <ResultsContainer id="results">
-          {filteredData.map(tool => (
-            <ToolCard key={tool.id} tool={tool} />
-          ))}
-        </ResultsContainer>
+        <ResultContainer cards={filteredData.map(tool => (
+          <ToolCard key={tool.id} tool={tool} />
+        ))} />
       </Main>
     </AppContainer>
   );
