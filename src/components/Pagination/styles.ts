@@ -15,15 +15,8 @@ export const PageButton = styled.button<{ active?: boolean }>`
   border: 1px solid #646cff;
   border-radius: 4px;
   cursor: pointer;
-
-  // Remover o estilo disabled
-  // &:disabled {
-  //   color: #cccccc;
-  //   border-color: #cccccc;
-  //   cursor: not-allowed;
-  // }
-
-  &:hover {
+  
+  &:hover:not(:disabled) {
     background-color: #535bf2;
     color: #ffffff;
   }
