@@ -1,4 +1,3 @@
-// components/Pagination/style.ts
 import styled from 'styled-components';
 
 export const PaginationContainer = styled.div`
@@ -17,13 +16,14 @@ export const PageButton = styled.button<{ active?: boolean }>`
   border-radius: 4px;
   cursor: pointer;
 
-  &:disabled {
-    color: #cccccc;
-    border-color: #cccccc;
-    cursor: not-allowed;
-  }
+  // Remover o estilo disabled
+  // &:disabled {
+  //   color: #cccccc;
+  //   border-color: #cccccc;
+  //   cursor: not-allowed;
+  // }
 
-  &:hover:not(:disabled) {
+  &:hover {
     background-color: #535bf2;
     color: #ffffff;
   }
