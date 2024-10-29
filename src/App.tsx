@@ -6,6 +6,7 @@ import ToolCard from './components/ToolCard';
 import { HeaderContainer } from './components/Header/styles';
 import { readTools } from './services/dataAccess/ferramentasAccess';
 import ResultContainer from './components/ResultContainer';
+import Pagination from './components/Pagination';
 
 interface Tool {
   id: string;
@@ -21,6 +22,8 @@ const App: React.FC = () => {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('Todas');
   const [filteredData, setFilteredData] = useState<Tool[]>([]);
+  const [currentPage, setCurrentPage] = useState(1); // Estado da página atual
+  const itemsPerPage = 10; // Definimos 10 cards por página
   
   useEffect(() => {
     const fetchTools = async () => {
@@ -45,9 +48,14 @@ const App: React.FC = () => {
         return inCategory && inQuery;
       });
       setFilteredData(filtered);
+      setCurrentPage(1);
     };
     filterData();
   }, [query, category, data]);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <AppContainer>
@@ -58,9 +66,15 @@ const App: React.FC = () => {
           <SearchBar query={query} setQuery={setQuery} />
           <CategorySelect category={category} setCategory={setCategory} />
         </Search>
-        <ResultContainer cards={filteredData.map(tool => (
+        <ResultContainer cards={currentItems.map(tool => (
           <ToolCard key={tool.id} tool={tool} />
         ))} />
+        <Pagination 
+          totalItems={filteredData.length} 
+          itemsPerPage={itemsPerPage} 
+          currentPage={currentPage} 
+          setCurrentPage={setCurrentPage} 
+        />
       </Main>
     </AppContainer>
   );
