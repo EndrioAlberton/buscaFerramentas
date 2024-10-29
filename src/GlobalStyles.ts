@@ -13,19 +13,20 @@ export const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;  /* Usa 100% da largura do contêiner pai */
-  height: 100%; /* Usa 100% da altura do contêiner pai */
-  padding: 0;   /* Remove padding, se houver */
-  margin: 0;    /* Remove margem, se houver */
-  box-sizing: border-box; /* Inclui padding e bordas nas dimensões */
+  width: 100%;  
+  height: 100%;
+  padding: 0;   
+  margin: 0;   
+  box-sizing: border-box;
 `;
 
 export const Search = styled.div`
-  margin: 10px; /* Você pode manter esta margem, mas tenha cuidado com o total */
+  margin: 10px; 
   display: flex;
-  justify-content: center; 
-  align-items: center;
-  width: 100%; /* Certifique-se de que não exceda a largura */
+  width: 100%;
+  justify-content: center;
+  align-items: center; 
+  max-width: 500px;
 `;
 
 export const GlobalStyles = createGlobalStyle`
