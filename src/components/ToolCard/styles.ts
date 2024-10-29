@@ -5,8 +5,8 @@ export const CardContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 280px;
-  margin: 0 25px 25px 25px;
+  width: 260px;
+  margin: 0 20px 25px 20px;
   position: relative;
 `;
 

@@ -4,7 +4,7 @@ import { CardContainer, GridContainer } from './styles';
 const ResultContainer: React.FC<{ cards: React.ReactNode[] }> = ({ cards }) => {
   return (
     <GridContainer>
-      {cards.slice(0, 10).map((card, index) => (
+      {cards.slice(0, 12).map((card, index) => (
         <CardContainer key={index}>{card}</CardContainer>
       ))}
     </GridContainer>

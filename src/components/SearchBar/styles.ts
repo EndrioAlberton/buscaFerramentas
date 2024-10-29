@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const SearchBarContainer = styled.div`
-  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: stretch;
+  align-items: center;
+  width: 280px;
 `;
 
 export const SearchInput = styled.input`

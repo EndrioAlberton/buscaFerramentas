@@ -22,9 +22,9 @@ const App: React.FC = () => {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('Todas');
   const [filteredData, setFilteredData] = useState<Tool[]>([]);
-  const [currentPage, setCurrentPage] = useState(1); // Estado da página atual
-  const itemsPerPage = 10; // Definimos 10 cards por página
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
+
   useEffect(() => {
     const fetchTools = async () => {
       try {

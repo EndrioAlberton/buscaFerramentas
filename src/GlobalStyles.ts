@@ -14,7 +14,6 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center;
   width: 100%;  
-  height: 100%;
   padding: 0;   
   margin: 0;   
   box-sizing: border-box;
@@ -26,12 +25,11 @@ export const Search = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center; 
-  max-width: 500px;
 `;
 
 export const GlobalStyles = createGlobalStyle`
   :root {
-    background-color: #f0f0f0; 
+    background-color: black; 
   }
 
   a {
