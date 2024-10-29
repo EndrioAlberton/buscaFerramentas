@@ -24,8 +24,13 @@ export const addTools = async () => {
 export const readTools = async () => {
   const snapshot = await toolsCollection.get();
   const tools: any[] = [];
+  
   snapshot.forEach(doc => {
     tools.push({ id: doc.id, ...doc.data() });
   });
+  
+  tools.sort((a, b) => a.nome.localeCompare(b.nome));
+  
   return tools;
 };
+
