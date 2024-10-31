@@ -19,17 +19,23 @@ export const Main = styled.main`
 `;
 
 export const Search = styled.div`
-  margin: 10px; 
   display: flex;
   width: 100%;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
+  margin: 10px auto;
+  gap: 30px;
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 export const GlobalStyles = createGlobalStyle`
   :root {
     background-color: #2f6b8e; 
-  }
+    }
 
   a {
     font-weight: 500;
@@ -48,6 +54,7 @@ export const GlobalStyles = createGlobalStyle`
     min-width: 320px;
     min-height: 100vh;
     font-family: Arial, sans-serif;
+    overflow-x: hidden;
   }
 
   h1 {
