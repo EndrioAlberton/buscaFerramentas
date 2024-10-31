@@ -5,6 +5,7 @@ export const HeaderContainer = styled.header`
   background-color: #282c34;
   color: white;
   text-align: center;
+  width: 100%;
   min-height: 40px;
 
   h1 {
