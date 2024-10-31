@@ -4,8 +4,19 @@ export const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 60px;
   gap: 8px;
-  magin-bottom: 10px;
+  box-sizing: border-box;
+  margin-bottom: 0.5%;
+
+  @media (max-width: 1800px) {
+    margin-bottom: 3%;
+  }
+  @media (min-width: 1780px) {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
 `;
 
 export const PageButton = styled.button<{ active?: boolean }>`
