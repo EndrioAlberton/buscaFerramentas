@@ -3,7 +3,6 @@ import styled, { createGlobalStyle } from 'styled-components';
 export const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #2f6b8e; 
   width: 100vw; 
   height: 100vh; 
   box-sizing: border-box; 
@@ -29,7 +28,7 @@ export const Search = styled.div`
 
 export const GlobalStyles = createGlobalStyle`
   :root {
-    background-color: black; 
+    background-color: #2f6b8e; 
   }
 
   a {
@@ -43,7 +42,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    margin: 0; v
+    margin: 0; 
     display: flex;
     place-items: center;
     min-width: 320px;
@@ -80,7 +79,7 @@ export const GlobalStyles = createGlobalStyle`
   @media (prefers-color-scheme: light) {
     :root {
       color: #213547;
-      background-color: #f0f0f0; 
+      background-color: #2f6b8e; 
     }
 
     a:hover {
