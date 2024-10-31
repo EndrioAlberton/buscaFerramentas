@@ -28,6 +28,6 @@ export const Select = styled.select`
   }
 
   @media (max-width: 600px) {
-    width: 90%;
+    width: 260px;
   }
 `;
