@@ -17,6 +17,7 @@ export const CardHeader = styled.div`
     object-fit: contain;
     object-position: center;
     padding: 10px;
+  }
 `;
 
 export const CardBody = styled.div`
