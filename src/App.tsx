@@ -7,6 +7,7 @@ import { HeaderContainer } from './components/Header/styles';
 import { readTools } from './services/dataAccess/ferramentasAccess';
 import ResultContainer from './components/ResultContainer';
 import Pagination from './components/Pagination';
+import Modal from './components/Modal';
 
 interface Tool {
   id: string;
@@ -23,6 +24,9 @@ const App: React.FC = () => {
   const [category, setCategory] = useState('Todas');
   const [filteredData, setFilteredData] = useState<Tool[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedTool, setSelectedTool] = useState<Tool | null>(null);
+
   const itemsPerPage = 12;
 
   useEffect(() => {
@@ -53,6 +57,16 @@ const App: React.FC = () => {
     filterData();
   }, [query, category, data]);
 
+  const openModal = (tool: Tool) => {
+    setSelectedTool(tool);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedTool(null);
+    setModalOpen(false);
+  };
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
@@ -67,7 +81,7 @@ const App: React.FC = () => {
           <CategorySelect category={category} setCategory={setCategory} />
         </Search>
         <ResultContainer cards={currentItems.map(tool => (
-          <ToolCard key={tool.id} tool={tool} />
+          <ToolCard key={tool.id} tool={tool} openModal={openModal} />
         ))} />
         <Pagination 
           totalItems={filteredData.length} 
@@ -76,6 +90,7 @@ const App: React.FC = () => {
           setCurrentPage={setCurrentPage} 
         />
       </Main>
+      <Modal isOpen={modalOpen} tool={selectedTool} onClose={closeModal} />
     </AppContainer>
   );
 };
