@@ -62,9 +62,10 @@ export const CardFooter = styled.div`
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%;
+  width: 40%; 
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const CardLink = styled.a`
