@@ -14,7 +14,8 @@ export const ModalOverlay = styled.div`
 
 export const ModalContent = styled.div`
   background: white;
-  width: 500px;
+  width: 90%;
+  max-width: 500px;
   padding: 20px;
   border-radius: 10px;
   display: flex;
@@ -25,6 +26,10 @@ export const ModalContent = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.3s ease-in-out;
+
+  @media (max-width: 480px) {
+    padding: 15px;
+  }
 `;
 
 export const ModalHeader = styled.div`
@@ -46,20 +51,34 @@ export const ModalBody = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px 0;
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 `;
 
 export const ModalColumn = styled.div`
   width: 45%;
+  
   h3 {
     font-size: 16px;
     margin-bottom: 10px;
   }
+  
   ul {
     list-style: none;
     padding: 0;
   }
+  
   li {
     font-size: 14px;
     margin-bottom: 5px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 100%;
+    margin-bottom: 10px;
   }
 `;
