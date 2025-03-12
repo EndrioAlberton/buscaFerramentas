@@ -4,7 +4,7 @@ import SearchBar from './components/SearchBar';
 import CategorySelect from './components/CategorySelect';
 import ToolCard from './components/ToolCard';
 import { HeaderContainer } from './components/Header/styles';
-import { readTools } from './services/dataAccess/ferramentasAccess';
+import { readTools, resetTools } from './services/dataAccess/ferramentasAccess';
 import ResultContainer from './components/ResultContainer';
 import Pagination from './components/Pagination';
 import Modal from './components/Modal';
@@ -32,6 +32,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchTools = async () => {
       try {
+        //await resetTools();
         const tools = await readTools();
         setData(tools);
         setFilteredData(tools);
