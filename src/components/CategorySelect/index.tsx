@@ -18,6 +18,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({ category, setCategory }
           <option value="Colaboração">Colaboração</option>
           <option value="Design">Design</option>
           <option value="Jogos">Jogos</option>
+          <option value="Mapas">Mapas</option>
           <option value="Organização">Organização</option>
           <option value="Programação">Programação</option>
           <option value="Vídeos">Vídeos</option>
