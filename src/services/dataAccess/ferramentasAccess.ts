@@ -1,5 +1,5 @@
 import { db } from '../../firebaseConfig';
-import { collection, getDocs, addDoc, writeBatch, doc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, writeBatch } from 'firebase/firestore';
 import data from '../tools.json'; 
 
 const toolsCollection = collection(db, 'tools');
