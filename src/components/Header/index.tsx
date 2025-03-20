@@ -9,13 +9,13 @@ export const Header: React.FC = () => {
           component="img"
           src="/logoif.png"
           alt="Logo IF"
-          sx={{ height: 40, width: 'auto' }}
+          sx={{ height: 50, width: 'auto' }}
         />
         <Box
           component="img"
           src="/logoMPIE.png"
           alt="Logo MPIE"
-          sx={{ height: 40, width: 'auto' }}
+          sx={{ height: 50, width: 'auto' }}
         />
       </Toolbar>
     </AppBar>
