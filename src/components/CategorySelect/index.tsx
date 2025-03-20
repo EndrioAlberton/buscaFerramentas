@@ -1,5 +1,5 @@
 import React from 'react';
-import { CategoriesContainer, Select } from './styles';
+import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 
 interface CategorySelectProps {
     category: string;
@@ -7,25 +7,37 @@ interface CategorySelectProps {
 }
 
 const CategorySelect: React.FC<CategorySelectProps> = ({ category, setCategory }) => {
+    const handleChange = (event: SelectChangeEvent) => {
+        setCategory(event.target.value);
+    };
+
     return (
-        <Select
-          id="category-select"
-          value={category}
-          onChange={e => setCategory(e.target.value)}
-        >
-          <option value="Todas">Todas</option>
-          <option value="Apresentações">Apresentações</option>
-          <option value="Colaboração">Colaboração</option>
-          <option value="Design">Design</option>
-          <option value="Jogos">Jogos</option>
-          <option value="Mapas">Mapas</option>
-          <option value="Organização">Organização</option>
-          <option value="Programação">Programação</option>
-          <option value="Vídeos">Vídeos</option>
-          <option value="Interatividade">Interatividade</option>
-          <option value="Quiz">Quiz</option>
-        </Select>
+        <FormControl fullWidth>
+            <InputLabel id="category-select-label">Categoria</InputLabel>
+            <Select
+                labelId="category-select-label"
+                id="category-select"
+                value={category}
+                label="Categoria"
+                onChange={handleChange}
+                sx={{
+                    borderRadius: 2,
+                }}
+            >
+                <MenuItem value="Todas">Todas</MenuItem>
+                <MenuItem value="Apresentações">Apresentações</MenuItem>
+                <MenuItem value="Colaboração">Colaboração</MenuItem>
+                <MenuItem value="Design">Design</MenuItem>
+                <MenuItem value="Jogos">Jogos</MenuItem>
+                <MenuItem value="Mapas">Mapas</MenuItem>
+                <MenuItem value="Organização">Organização</MenuItem>
+                <MenuItem value="Programação">Programação</MenuItem>
+                <MenuItem value="Vídeos">Vídeos</MenuItem>
+                <MenuItem value="Interatividade">Interatividade</MenuItem>
+                <MenuItem value="Quiz">Quiz</MenuItem>
+            </Select>
+        </FormControl>
     );
-  };
-  
-  export default CategorySelect;
+};
+
+export default CategorySelect;
