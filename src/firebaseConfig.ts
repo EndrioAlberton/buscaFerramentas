@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -13,9 +13,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
+const app = initializeApp(firebaseConfig);
 
 // Initialize Cloud Firestore and get a reference to the service
-export const db = firebase.firestore();
+export const db = getFirestore(app);

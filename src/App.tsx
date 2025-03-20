@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AppContainer, GlobalStyles, Main, Search } from './GlobalStyles';
+import { Box, Container, Stack } from '@mui/material';
 import SearchBar from './components/SearchBar';
 import CategorySelect from './components/CategorySelect';
 import ToolCard from './components/ToolCard';
@@ -16,6 +16,8 @@ interface Tool {
   link: string;
   imagem: string;
   categorias: string[];
+  vantagens: string[];
+  limitações: string[];
 }
 
 const App: React.FC = () => {
@@ -73,26 +75,27 @@ const App: React.FC = () => {
   const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <AppContainer>
-      <Header/>
-      <GlobalStyles />
-      <Main>
-        <Search>
-          <SearchBar query={query} setQuery={setQuery} />
-          <CategorySelect category={category} setCategory={setCategory} />
-        </Search>
-        <ResultContainer cards={currentItems.map(tool => (
-          <ToolCard key={tool.id} tool={tool} openModal={openModal} />
-        ))} />
-        <Pagination 
-          totalItems={filteredData.length} 
-          itemsPerPage={itemsPerPage} 
-          currentPage={currentPage} 
-          setCurrentPage={setCurrentPage} 
-        />
-      </Main>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Header />
+      <Container maxWidth="lg" sx={{ flex: 1, py: 4 }}>
+        <Stack spacing={3} alignItems="stretch">
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems="center" justifyContent="center" sx={{ mb: 3 }}>
+            <SearchBar query={query} setQuery={setQuery} />
+            <CategorySelect category={category} setCategory={setCategory} />
+          </Stack>
+          <ResultContainer cards={currentItems.map(tool => (
+            <ToolCard key={tool.id} tool={tool} openModal={openModal} />
+          ))} />
+          <Pagination 
+            totalItems={filteredData.length} 
+            itemsPerPage={itemsPerPage} 
+            currentPage={currentPage} 
+            setCurrentPage={setCurrentPage} 
+          />
+        </Stack>
+      </Container>
       <Modal isOpen={modalOpen} tool={selectedTool} onClose={closeModal} />
-    </AppContainer>
+    </Box>
   );
 };
 

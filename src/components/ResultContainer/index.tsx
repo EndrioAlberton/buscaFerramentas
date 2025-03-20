@@ -1,13 +1,15 @@
 import React from 'react';
-import { CardContainer, GridContainer } from './styles';
+import { Grid } from '@mui/material';
 
 const ResultContainer: React.FC<{ cards: React.ReactNode[] }> = ({ cards }) => {
   return (
-    <GridContainer>
+    <Grid container spacing={0} justifyContent="center" alignItems="center">
       {cards.slice(0, 12).map((card, index) => (
-        <CardContainer key={index}>{card}</CardContainer>
+        <Grid item xs={12} sm={4} md={4} key={index}>
+          {card}
+        </Grid>
       ))}
-    </GridContainer>
+    </Grid>
   );
 };
 

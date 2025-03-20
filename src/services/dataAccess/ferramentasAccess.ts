@@ -1,12 +1,13 @@
 import { db } from '../../firebaseConfig';
+import { collection, getDocs, addDoc, writeBatch, doc, deleteDoc } from 'firebase/firestore';
 import data from '../tools.json'; 
 
-const toolsCollection = db.collection('tools');
+const toolsCollection = collection(db, 'tools');
 
 export const addTools = async () => {
   const existingToolsMap = new Map();
   
-  const snapshot = await toolsCollection.get();
+  const snapshot = await getDocs(toolsCollection);
   snapshot.forEach(doc => {
     const toolData = doc.data();
     existingToolsMap.set(toolData.nome.toLowerCase(), doc.id);
@@ -20,7 +21,7 @@ export const addTools = async () => {
       const normalizedName = tool.nome.toLowerCase();
       
       if (!existingToolsMap.has(normalizedName)) {
-        await toolsCollection.add({
+        await addDoc(toolsCollection, {
           ...tool,
           createdAt: new Date().toISOString()
         });
@@ -40,7 +41,7 @@ export const addTools = async () => {
 };
 
 export const readTools = async () => {
-  const snapshot = await toolsCollection.get();
+  const snapshot = await getDocs(toolsCollection);
   const tools: any[] = [];
   
   snapshot.forEach(doc => {
@@ -54,8 +55,8 @@ export const readTools = async () => {
 
 export const resetTools = async () => {
   try {
-    const snapshot = await toolsCollection.get();
-    const batch = db.batch();
+    const snapshot = await getDocs(toolsCollection);
+    const batch = writeBatch(db);
     
     snapshot.docs.forEach((doc) => {
       batch.delete(doc.ref);
@@ -65,7 +66,7 @@ export const resetTools = async () => {
     console.log('Coleção limpa com sucesso');
     
     for (const tool of data) {
-      await toolsCollection.add(tool);
+      await addDoc(toolsCollection, tool);
     }
     console.log('Novas ferramentas adicionadas');
   } catch (error) {
