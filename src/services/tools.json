@@ -365,7 +365,7 @@
     "descricao": "Criação de conteúdo digital que permite desenvolver materiais educacionais interativos com recursos de gamificação e avaliação.",
     "link": "https://octostudio.org",
     "imagem": "https://octostudio.org/assets/app-icon-6F-yvMkA.svg",
-    "pontos_positivos": [
+    "vantagens": [
       "Interface amigável e acessível para iniciantes",
       "Aprendizado interativo e experimental",
       "Suporte à colaboração em grupo",
@@ -373,7 +373,7 @@
       "Multiplataforma (desktop e mobile)",
       "Compatível com leitores de tela e permite navegação por teclado"
     ],
-    "limitacoes": [
+    "limitações": [
       "Dependência de internet"
     ]
   },
@@ -386,14 +386,14 @@
     "descricao": "Gerador de nuvens de palavras onde o tamanho de cada palavra é proporcional à sua frequência ou relevância em um conjunto de dados.",
     "link": "https://www.wordclouds.com",
     "imagem": "https://www.wordclouds.co.uk/pics/logo-fb-en-gb.png",
-    "pontos_positivos": [
+    "vantagens": [
       "Gratuito e sem necessidade de cadastro",
       "Visualização instantânea de palavras-chave",
       "Criação rápida e sem necessidade de design avançado",
       "Personalização de formas, cores e fontes",
       "Acessível: suporte a leitores de tela e navegação por teclado"
     ],
-    "limitacoes": [
+    "limitações": [
       "Não captura relações semânticas entre palavras",
       "Pode gerar compreensão superficial do conteúdo",
       "Design pode ser confuso com muitas palavras",
@@ -409,13 +409,13 @@
     "descricao": "Criador popular de nuvens de palavras, permitindo diversas personalizações visuais.",
     "link": "https://www.wordart.com.br",
     "imagem": "https://cdn.wordart.com/static/img/logo.webp",
-    "pontos_positivos": [
+    "vantagens": [
       "Interface intuitiva e fácil de usar",
       "Personalização avançada de formas, fontes e cores",
       "Sem necessidade de conta para testes",
       "Exportação em vários formatos (PNG, JPEG, SVG, PDF)"
     ],
-    "limitacoes": [
+    "limitações": [
       "Requer conta para salvar e acessar funcionalidades avançadas",
       "Recursos premium disponíveis apenas na versão paga",
       "Acessibilidade limitada para usuários com deficiência visual",
@@ -431,14 +431,14 @@
     "descricao": "Ferramenta online para Mapas personalizados com representação visual de dados geográficos.",
     "link": "https://www.mapchart.net/index.html",
     "imagem": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Official_MapChart_logo.png",
-    "pontos_positivos": [
+    "vantagens": [
       "Visualização clara de dados geográficos",
       "Personalização de cores, rótulos e detalhes",
       "Facilita a análise de padrões regionais",
       "Inserção de dados personalizados",
       "Multiplataforma (desktop e mobile)"
     ],
-    "limitacoes": [
+    "limitações": [
       "Dependência de internet",
       "Personalização limitada para design avançado",
       "Curva de aprendizado para novos usuários",
@@ -454,7 +454,7 @@
     "descricao": "Ferramenta para exploração do globo terrestre em 3D, Mapas personalizados e visualização de lugares ao redor do mundo.",
     "link": "https://www.google.com.br/earth/",
     "imagem": "https://img.icons8.com/?size=512&id=63210&format=png",
-    "pontos_positivos": [
+    "vantagens": [
       "Gratuito",
       "Exploração detalhada do mundo em 3D",
       "Mapas personalizados",
@@ -462,7 +462,7 @@
       "Ajustes de zoom, ângulo e modo escuro",
       "Compatibilidade com leitores de tela"
     ],
-    "limitacoes": [
+    "limitações": [
       "Dependência de internet",
       "Precisão variável das imagens",
       "Cobertura geográfica incompleta em algumas regiões",
