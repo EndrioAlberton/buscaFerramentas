@@ -7,7 +7,6 @@ export const PaginationContainer = styled.div`
   height: 60px;
   gap: 8px;
   box-sizing: border-box;
-  margin-bottom: 0.5%;
 
   @media (max-width: 1800px) {
     margin-bottom: 3%;

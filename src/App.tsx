@@ -3,7 +3,7 @@ import { AppContainer, GlobalStyles, Main, Search } from './GlobalStyles';
 import SearchBar from './components/SearchBar';
 import CategorySelect from './components/CategorySelect';
 import ToolCard from './components/ToolCard';
-import { HeaderContainer } from './components/Header/styles';
+import { Header } from './components/Header';
 import { readTools, resetTools } from './services/dataAccess/ferramentasAccess';
 import ResultContainer from './components/ResultContainer';
 import Pagination from './components/Pagination';
@@ -74,7 +74,7 @@ const App: React.FC = () => {
 
   return (
     <AppContainer>
-      <HeaderContainer />
+      <Header/>
       <GlobalStyles />
       <Main>
         <Search>
