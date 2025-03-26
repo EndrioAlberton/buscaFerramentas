@@ -102,7 +102,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
                 color: '#ffffff',
                 cursor: 'pointer', 
                 '&:hover': {
-                  backgroundColor: '#2f6b8e', 
+                  backgroundColor: '#2f6b8e',
                   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)', 
                 }
               }}
