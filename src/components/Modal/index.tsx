@@ -40,7 +40,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, tool, onClose }) => {
         <Box sx={{ display: 'flex', gap: 4, flexDirection: { xs: 'column', md: 'row' } }}>
           <Box sx={{ flex: 1 }}>
             <Typography variant="h6" gutterBottom>
-              Vantagens
+              Aspectos relevantes
             </Typography>
             <List>
               {(tool.vantagens || []).map((vantagem, index) => (
