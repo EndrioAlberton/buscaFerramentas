@@ -26,18 +26,18 @@ interface ToolCardProps {
 
 const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
   return (
-      <Card sx={{ 
-        padding: 0,
-        height: '400px', // altura fixa para garantir uniformidade entre os cards
-        display: 'flex', 
-        flexDirection: 'column',
-        border: '1px solid #e0e0e0',
-        '&:hover': {
-          boxShadow: 3,
-          borderColor: 'primary.main',
-        },
-        m: 1
-      }}>
+    <Card sx={{ 
+      padding: 0,
+      height: '400px',
+      display: 'flex', 
+      flexDirection: 'column',
+      border: '1px solid #e0e0e0',
+      '&:hover': {
+        boxShadow: 3,
+        borderColor: 'primary.main',
+      },
+      m: 1
+    }}>
       <CardMedia
         component="img"
         height="140"
@@ -62,10 +62,8 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
                 sx={{ 
                   borderColor: 'primary.main',
                   color: 'primary.main',
-                  '&:hover': {
-                    backgroundColor: 'primary.main',
-                    color: 'white',
-                  }
+                  cursor: 'default', 
+                  pointerEvents: 'none', 
                 }}
               />
             ))}
@@ -90,11 +88,10 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
             display: 'flex', 
             gap: 1, 
             mt: 'auto',
-            height: '40px' // Altura fixa para os botões
+            height: '40px'
           }}>
             <Button
               variant="contained"
-              color="primary"
               href={tool.link}
               target="_blank"
               rel="noopener noreferrer"
@@ -102,8 +99,11 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
                 flex: 1,
                 height: '100%',
                 backgroundColor: '#1f4b6e',
+                color: '#ffffff',
+                cursor: 'pointer', 
                 '&:hover': {
-                  backgroundColor: '#2f6b8e',
+                  backgroundColor: '#2f6b8e', 
+                  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)', 
                 }
               }}
             >
@@ -111,7 +111,6 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
             </Button>
             <Button
               variant="outlined"
-              color="primary"
               onClick={() => openModal(tool)}
               sx={{ 
                 minWidth: '40px',
@@ -119,8 +118,9 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
                 borderColor: '#1f4b6e',
                 color: '#1f4b6e',
                 '&:hover': {
-                  borderColor: '#2f6b8e',
-                  backgroundColor: 'rgba(47, 107, 142, 0.04)',
+                  backgroundColor: '#1f4b6e', 
+                  borderColor: '#1f4b6e',
+                  color: '#ffffff', 
                 }
               }}
             >
