@@ -34,7 +34,6 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchTools = async () => {
       try {
-        //await resetTools();
         const tools = await readTools();
         setData(tools);
         setFilteredData(tools);
@@ -42,15 +41,16 @@ const App: React.FC = () => {
         console.error('Erro ao buscar ferramentas:', error);
       }
     };
-
     fetchTools();
   }, []);
 
   useEffect(() => {
     const filterData = () => {
       const lowerCaseQuery = query.toLowerCase();
+      const normalizedCategory = category.toLowerCase().replace(/ /g, '_');
       const filtered = data.filter(tool => {
-        const inCategory = category === 'Todas' || tool.categorias.includes(category);
+        const normalizedToolCategories = tool.categorias.map(cat => cat.toLowerCase().replace(/ /g, '_'));
+        const inCategory = category === 'Todas' || normalizedToolCategories.includes(normalizedCategory);
         const inQuery = tool.nome.toLowerCase().includes(lowerCaseQuery) || tool.descricao.toLowerCase().includes(lowerCaseQuery);
         return inCategory && inQuery;
       });

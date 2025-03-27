@@ -25,17 +25,17 @@ interface ToolCardProps {
 }
 
 const categoryColors: { [key: string]: string } = {
-  Apresentações: '#14b290', 
-  Colaboração: '#388e3c',   
-  Design: '#d81b60',            
-  Jogos: '#f57c00',         
-  Mapas: '#0288d1',         
-  Organização: '#7b1fa2',   
-  Programação: '#5c18c2',   
-  Vídeos: '#c63939',       
-  Interatividade: '#392924', 
-  Quiz: '#fbc02d',      
-  Nuvens_de_palavras: '#83c409',  
+  "apresentações": '#14b290', 
+  "colaboração": '#388e3c',   
+  "design": '#d81b60',        
+  "jogos": '#f57c00',         
+  "mapas": '#0288d1',         
+  "organização": '#7b1fa2',   
+  "programação": '#5c18c2',   
+  "vídeos": '#c63939',        
+  "interatividade": '#392924', 
+  "quiz": '#fbc02d',          
+  "nuvens de palavras": '#76d662', 
 };
 
 const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
@@ -66,20 +66,25 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
       <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <Stack spacing={2} sx={{ flex: 1 }}>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-            {tool.categorias.map((categoria, index) => (
-              <Chip
-                key={index}
-                label={categoria}
-                size="small"
-                variant="outlined"
-                sx={{ 
-                  borderColor: categoryColors[categoria] || '#1976d2',
-                  color: categoryColors[categoria] || '#1976d2',
-                  cursor: 'default', 
-                  pointerEvents: 'none', 
-                }}
-              />
-            ))}
+            {tool.categorias.map((categoria, index) => {
+              const formattedCategory = categoria.replace(/_/g, ' ').trim().toLowerCase();
+              console.log('Categoria:', categoria, 'Cor encontrada:', categoryColors[formattedCategory]);
+
+              return (
+                <Chip
+                  key={index}
+                  label={categoria}
+                  size="small"
+                  variant="outlined"
+                  sx={{ 
+                    borderColor: categoryColors[formattedCategory] || '#1976d2',
+                    color: categoryColors[formattedCategory] || '#1976d2',
+                    cursor: 'default', 
+                    pointerEvents: 'none', 
+                  }}
+                />
+              );
+            })}
           </Box>
           <Typography gutterBottom variant="h6" component="h2" sx={{ 
             color: '#1f4b6e',

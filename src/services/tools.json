@@ -165,8 +165,7 @@
     "nome": "Kahoot",
     "descricao": "Plataforma popular de aprendizado baseada em jogos.",
     "categorias": [
-      "Jogos",
-      "Aprendizado"
+      "Jogos"
     ],
     "link": "https://www.kahoot.com",
     "imagem": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Kahoot_Logo.svg",
@@ -187,7 +186,7 @@
     "descricao": "Ferramenta para criação de jogos 2D e 3D.",
     "categorias": [
       "Jogos",
-      "Desenvolvimento"
+      "Programação"
     ],
     "link": "https://unity.com/pt",
     "imagem": "https://upload.wikimedia.org/wikipedia/commons/1/19/Unity_Technologies_logo.svg",
@@ -207,8 +206,7 @@
     "nome": "Scratch",
     "descricao": "Linguagem de programação criada pelo MIT Media Lab para crianças e iniciantes.",
     "categorias": [
-      "Programação",
-      "Educação"
+      "Programação"
     ],
     "link": "https://scratch.mit.edu/",
     "imagem": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Scratchlogo.svg/1920px-Scratchlogo.svg.png",
@@ -270,9 +268,8 @@
     "nome": "MindMeister",
     "descricao": "Ferramenta de mapeamento mental que auxilia na organização de ideias.",
     "categorias": [
-      "Organização",
-      "Pensamento Visual"
-    ],
+      "Organização"
+      ],
     "link": "https://www.mindmeister.com",
     "imagem": "https://seeklogo.com/images/M/mindmeister-logo-454DBF2AB2-seeklogo.com.png?v=638379982610000000",
     "vantagens": [
@@ -291,7 +288,6 @@
     "nome": "Trello",
     "descricao": "Plataforma de gerenciamento de tarefas que permite a organização visual.",
     "categorias": [
-      "Gerenciamento",
       "Organização"
     ],
     "link": "https://trello.com/",
@@ -360,7 +356,7 @@
     "id": "17",
     "nome": "Octostudio",
     "categorias": [
-      "Programação Visual"
+      "Programação"
     ],
     "descricao": "Criação de conteúdo digital que permite desenvolver materiais educacionais interativos com recursos de gamificação e avaliação.",
     "link": "https://octostudio.org",
@@ -381,7 +377,7 @@
     "id": "18",
     "nome": "Wordclouds",
     "categorias": [
-      "Geração de Nuvens de Palavras"
+      "Nuvens de Palavras"
     ],
     "descricao": "Gerador de nuvens de palavras onde o tamanho de cada palavra é proporcional à sua frequência ou relevância em um conjunto de dados.",
     "link": "https://www.wordclouds.com",
@@ -404,7 +400,7 @@
     "id": "19",
     "nome": "WordArt",
     "categorias": [
-      "Geração de Nuvens de Palavras"
+      "Nuvens de Palavras"
     ],
     "descricao": "Criador popular de nuvens de palavras, permitindo diversas personalizações visuais.",
     "link": "https://www.wordart.com.br",

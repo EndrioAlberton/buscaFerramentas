@@ -28,6 +28,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({ category, setCategory }
                 <MenuItem value="Apresentações">Apresentações</MenuItem>
                 <MenuItem value="Colaboração">Colaboração</MenuItem>
                 <MenuItem value="Design">Design</MenuItem>
+                <MenuItem value="Nuvens de palavras">Nuvens de palavras</MenuItem>
                 <MenuItem value="Jogos">Jogos</MenuItem>
                 <MenuItem value="Mapas">Mapas</MenuItem>
                 <MenuItem value="Organização">Organização</MenuItem>
