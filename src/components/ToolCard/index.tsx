@@ -24,6 +24,20 @@ interface ToolCardProps {
   openModal: (tool: any) => void;
 }
 
+const categoryColors: { [key: string]: string } = {
+  Apresentações: '#14b290', 
+  Colaboração: '#388e3c',   
+  Design: '#d81b60',            
+  Jogos: '#f57c00',         
+  Mapas: '#0288d1',         
+  Organização: '#7b1fa2',   
+  Programação: '#5c18c2',   
+  Vídeos: '#c63939',       
+  Interatividade: '#392924', 
+  Quiz: '#fbc02d',      
+  Nuvens_de_palavras: '#83c409',  
+};
+
 const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
   return (
     <Card sx={{ 
@@ -57,11 +71,10 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
                 key={index}
                 label={categoria}
                 size="small"
-                color="primary"
                 variant="outlined"
                 sx={{ 
-                  borderColor: 'primary.main',
-                  color: 'primary.main',
+                  borderColor: categoryColors[categoria] || '#1976d2',
+                  color: categoryColors[categoria] || '#1976d2',
                   cursor: 'default', 
                   pointerEvents: 'none', 
                 }}
