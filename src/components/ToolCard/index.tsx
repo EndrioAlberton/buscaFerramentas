@@ -72,17 +72,17 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
 
               return (
                 <Chip
-                  key={index}
-                  label={categoria}
-                  size="small"
-                  variant="outlined"
-                  sx={{ 
-                    borderColor: categoryColors[formattedCategory] || '#1976d2',
-                    color: categoryColors[formattedCategory] || '#1976d2',
-                    cursor: 'default', 
-                    pointerEvents: 'none', 
-                  }}
-                />
+                key={index}
+                label={categoria}
+                size="small"
+                variant="outlined"
+                sx={{ 
+                  backgroundColor: categoryColors[formattedCategory] || '#1976d2',
+                  color: '#ffffff', 
+                  cursor: 'default', 
+                  pointerEvents: 'none', 
+                }}
+              />
               );
             })}
           </Box>
