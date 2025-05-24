@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -10,11 +10,13 @@ import {
   Box,
   Stack,
   Alert,
+  Divider,
 } from '@mui/material';
-import { Rating } from '../../types/rating';
-import { addRating } from '../../services/dataAccess/ratingsAccess';
+import { Rating, RatingStats } from '../../types/rating';
+import { addRating, getRatingStats } from '../../services/dataAccess/ratingsAccess';
 import { useAuth } from '../../contexts/AuthContext';
 import GoogleIcon from '@mui/icons-material/Google';
+import StarIcon from '@mui/icons-material/Star';
 
 interface RatingModalProps {
   isOpen: boolean;
@@ -41,6 +43,17 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
     gratuidade: 0,
   });
   const [error, setError] = useState<string | null>(null);
+  const [stats, setStats] = useState<RatingStats | null>(null);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      if (isOpen) {
+        const ratingStats = await getRatingStats(toolId);
+        setStats(ratingStats);
+      }
+    };
+    fetchStats();
+  }, [isOpen, toolId]);
 
   const handleRatingChange = (criteriaId: keyof Rating, value: number | null) => {
     setRatings(prev => ({
@@ -141,6 +154,44 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
             {error}
           </Alert>
         )}
+        {stats && (
+          <Box sx={{ mb: 3 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+              <StarIcon sx={{ color: '#fbc02d' }} />
+              <Typography variant="h6" component="span">
+                {stats.mediaGeral.toFixed(1)}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                ({stats.totalAvaliacoes} {stats.totalAvaliacoes === 1 ? 'avaliação' : 'avaliações'})
+              </Typography>
+            </Box>
+            <Stack spacing={1}>
+              {RATING_CRITERIA.map(({ id, label }) => {
+                const criteriaId = id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName'>;
+                return (
+                  <Box key={id} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Typography variant="body2">{label}</Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <MuiRating
+                        value={stats.detalhes[criteriaId]}
+                        precision={0.1}
+                        readOnly
+                        size="small"
+                      />
+                      <Typography variant="body2" color="text.secondary">
+                        ({stats.detalhes[criteriaId].toFixed(1)})
+                      </Typography>
+                    </Box>
+                  </Box>
+                );
+              })}
+            </Stack>
+          </Box>
+        )}
+        <Divider sx={{ my: 2 }} />
+        <Typography variant="h6" gutterBottom>
+          Sua Avaliação
+        </Typography>
         <Stack spacing={3} sx={{ mt: 2 }}>
           {RATING_CRITERIA.map(({ id, label, description }) => (
             <Box key={id}>
@@ -150,8 +201,8 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
               </Typography>
               <MuiRating
                 name={id}
-                value={ratings[id as keyof Rating]}
-                onChange={(_, value) => handleRatingChange(id as keyof Rating, value)}
+                value={ratings[id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName'>]}
+                onChange={(_, value) => handleRatingChange(id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName'>, value)}
                 size="large"
               />
             </Box>

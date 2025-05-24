@@ -9,14 +9,12 @@ export interface Rating {
   userName?: string;
 }
 
+type RatingDetails = {
+  [K in keyof Omit<Rating, 'userId' | 'userEmail' | 'userName'>]: number;
+};
+
 export interface RatingStats {
   mediaGeral: number;
   totalAvaliacoes: number;
-  detalhes: {
-    usabilidade: number;
-    recursos: number;
-    design: number;
-    documentacao: number;
-    gratuidade: number;
-  };
+  detalhes: RatingDetails;
 } 
