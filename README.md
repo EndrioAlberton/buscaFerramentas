@@ -4,6 +4,27 @@ Este projeto faz parte do **Inovação Pedagógica na Educação Básica** (Edit
 
 ---
 
+## 🏛️ Instituição
+
+**Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Sul**  
+Campus Porto Alegre
+
+---
+
+## 👥 Colaboradores
+
+### Coordenação
+- **Carine Bueira Loureiro**
+
+### Colaboradora
+- **Silvia de Castro Bertagnolli**
+
+### Desenvolvimento
+- **Endrio Alberton Correa Nunes**  
+  Contato: endrio.alberton@gmail.com
+
+---
+
 ## 📚 Contexto
 
 O projeto surge a partir de três constatações:
@@ -34,7 +55,7 @@ Desenvolver um sistema web que permita aos professores:
 ## 🛠️ Tecnologias Utilizadas
 
 - **React**: Biblioteca JavaScript para criação de interfaces de usuário.
-- **Styled-Components**: Para estilização de componentes com CSS-in-JS.
+- **Material-UI**: Biblioteca de componentes React para um design moderno e responsivo.
 - **TypeScript**: Superset do JavaScript que adiciona tipagem estática ao código.
 - **Firebase**: Utilizado para armazenamento e sincronização de dados em tempo real, garantindo:
   - **Escalabilidade**: Suporte para crescimento do sistema sem necessidade de grandes alterações na infraestrutura.
@@ -47,24 +68,36 @@ Desenvolver um sistema web que permita aos professores:
 ### Página Inicial
 - Barra de busca para inserção de palavras-chave.
 - Exibição de categorias para facilitar a busca.
+- Sistema de avaliação das ferramentas.
 
-### Página de Resultados
+### Resultados da Busca
 - Lista de ferramentas que correspondem aos critérios de busca.
 - Informações básicas como nome, descrição curta e imagem.
-- Botão para ver mais detalhes de cada ferramenta.
+- Média de avaliações e número total de avaliações.
+- Categorização por cores para fácil identificação.
 
-### Página de Detalhes da Ferramenta
+### Detalhes da Ferramenta
 - Informações detalhadas sobre a ferramenta.
-- Link para acessar ou baixar a ferramenta.
+- Aspectos relevantes e limitações.
+- Link direto para acesso.
+- Possibilidade de avaliar a ferramenta.
 
 ---
 
 ## 🚀 Fluxo de Trabalho
 
-1. **Página Inicial**: O professor acessa a página inicial e insere palavras-chave na barra de busca ou seleciona uma categoria.
-2. **Processamento da Busca**: A aplicação filtra a lista de ferramentas com base nos dados armazenados no Firebase e exibe os resultados.
-3. **Página de Resultados**: Apresenta uma lista de ferramentas correspondentes aos critérios de busca.
-4. **Página de Detalhes**: Exibe informações detalhadas e link para acesso à ferramenta.
+1. **Página Inicial**: O professor acessa a página inicial e pode:
+   - Buscar ferramentas por palavras-chave
+   - Filtrar por categorias
+   - Ver avaliações das ferramentas
+
+2. **Processamento da Busca**: A aplicação filtra a lista de ferramentas com base nos critérios selecionados.
+
+3. **Visualização e Interação**: O professor pode:
+   - Ver detalhes das ferramentas
+   - Avaliar as ferramentas
+   - Acessar diretamente as ferramentas
+   - Filtrar por diferentes categorias
 
 ---
 
@@ -72,7 +105,7 @@ Desenvolver um sistema web que permita aos professores:
 
 ![Imagem do Sistema](./public/eduTools.png)
 
-> Exemplo da interface.
+> Interface principal do sistema mostrando a busca de ferramentas.
 
 ---
 
@@ -106,3 +139,7 @@ Desenvolver um sistema web que permita aos professores:
     ```
 
 ---
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
