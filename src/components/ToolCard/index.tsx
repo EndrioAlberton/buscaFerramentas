@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -8,11 +8,17 @@ import {
   Box,
   Chip,
   Stack,
+  Rating,
 } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
+import StarIcon from '@mui/icons-material/Star';
+import { getRatingStats } from '../../services/dataAccess/ratingsAccess';
+import { RatingStats } from '../../types/rating';
+import RatingModal from '../RatingModal';
 
 interface ToolCardProps {
   tool: {
+    id: string;
     nome: string;
     descricao: string;
     categorias: string[];
@@ -40,6 +46,17 @@ const categoryColors: { [key: string]: string } = {
 };
 
 const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal, setCategory }) => {
+  const [ratingStats, setRatingStats] = useState<RatingStats | null>(null);
+  const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchRatingStats = async () => {
+      const stats = await getRatingStats(tool.id);
+      setRatingStats(stats);
+    };
+    fetchRatingStats();
+  }, [tool.id]);
+
   return (
     <Card sx={{ 
       padding: 0,
@@ -88,13 +105,28 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal, setCategory }) => 
               );
             })}
           </Box>
-          <Typography gutterBottom variant="h6" component="h2" sx={{ 
-            color: '#1f4b6e',
-            fontWeight: 600,
-            fontSize: '1.1rem'
-          }}>
-            {tool.nome}
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Typography gutterBottom variant="h6" component="h2" sx={{ 
+              color: '#1f4b6e',
+              fontWeight: 600,
+              fontSize: '1.1rem',
+              flex: 1,
+              margin: 0
+            }}>
+              {tool.nome}
+            </Typography>
+            {ratingStats && (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                <StarIcon sx={{ color: '#fbc02d', fontSize: '1.2rem' }} />
+                <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                  {ratingStats.mediaGeral.toFixed(1)}
+                </Typography>
+                <Typography variant="caption" color="text.secondary">
+                  ({ratingStats.totalAvaliacoes})
+                </Typography>
+              </Box>
+            )}
+          </Box>
           <Typography variant="body2" color="text.secondary" sx={{ 
             flex: 1,
             display: '-webkit-box',
@@ -146,9 +178,31 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal, setCategory }) => 
             >
               <AddIcon />
             </Button>
+            <Button
+              variant="outlined"
+              onClick={() => setIsRatingModalOpen(true)}
+              sx={{ 
+                minWidth: '40px',
+                height: '100%',
+                borderColor: '#fbc02d',
+                color: '#fbc02d',
+                '&:hover': {
+                  backgroundColor: 'rgba(251, 192, 45, 0.04)', 
+                  borderColor: '#fbc02d',
+                }
+              }}
+            >
+              <StarIcon />
+            </Button>
           </Box>
         </Stack>
       </CardContent>
+      <RatingModal
+        isOpen={isRatingModalOpen}
+        onClose={() => setIsRatingModalOpen(false)}
+        toolId={tool.id}
+        toolName={tool.nome}
+      />
     </Card>
   );
 };
