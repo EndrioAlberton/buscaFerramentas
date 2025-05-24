@@ -13,7 +13,7 @@ export interface Rating {
 }
 
 type RatingDetails = {
-  [K in keyof Omit<Rating, 'userId' | 'userEmail' | 'userName'>]: number;
+  [K in keyof Omit<Rating, 'userId' | 'userEmail' | 'userName' >]: number;
 };
 
 export interface RatingStats {
