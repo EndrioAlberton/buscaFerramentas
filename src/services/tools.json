@@ -76,7 +76,7 @@
       "Jogos"
     ],
     "link": "https://wordwall.net/",
-    "imagem": "https://seeklogo.com/images/W/wordwall-logo-3918BB3625-seeklogo.com.png",
+    "imagem": "https://pbs.twimg.com/profile_images/2902415969/569e8ea1816b2ebdb71d4ededf1ca061_400x400.png",
     "vantagens": [
       "Interface intuitiva, não requer conhecimentos prévios.",
       "Permite compartilhamento e colaboração entre docentes.",
@@ -123,7 +123,7 @@
       "Interatividade"
     ],
     "link": "https://www.genially.com",
-    "imagem": "https://seeklogo.com/images/G/genially-logo-347C736FDC-seeklogo.com.png",
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/8/85/Genially_%282023%29_logotipo.png",
     "vantagens": [
       "Interface intuitiva e fácil de usar.",
       "Permite a criação de projetos diversos com interatividade avançada.",
@@ -163,21 +163,27 @@
   {
     "id": 8,
     "nome": "Kahoot",
-    "descricao": "Plataforma popular de aprendizado baseada em jogos.",
+    "descricao": "Ferramenta para aprendizagem baseada em jogos, com sistema de competição entre estudantes baseado em acertos e tempo de resposta.",
     "categorias": [
-      "Jogos"
+      "Jogos",
+      "Interatividade"
     ],
     "link": "https://www.kahoot.com",
     "imagem": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Kahoot_Logo.svg",
     "vantagens": [
-      "Plataforma intuitiva para criar quizzes.",
-      "Possui versão gratuita geralmente suficiente.",
-      "Permite participação ativa dos alunos.",
-      "Feedback instantâneo para os alunos."
+      "Criação de exercícios gamificados",
+      "Sistema de ranking competitivo",
+      "Contagem de tempo para respostas",
+      "Banco de questões reutilizável",
+      "Suporte para grupos de discussão",
+      "Apresentações interativas",
+      "Feedback imediato para alunos",
+      "Interface intuitiva e divertida"
     ],
     "limitações": [
-      "A versão offline é limitada.",
-      "Necessita uma conexão de internet estável."
+      "Dependência de conexão com internet",
+      "Versão gratuita com funcionalidades limitadas",
+      "Requer dispositivos compatíveis para todos os alunos"
     ]
   },
   {
@@ -271,7 +277,7 @@
       "Organização"
       ],
     "link": "https://www.mindmeister.com",
-    "imagem": "https://seeklogo.com/images/M/mindmeister-logo-454DBF2AB2-seeklogo.com.png?v=638379982610000000",
+    "imagem": "https://images.saasworthy.com/tr:w-160,h-0,c-at_max,e-sharpen-1/mindmeister_8308_logo_1629719040_ob5gi.png",
     "vantagens": [
       "Ótima interface e visualização.",
       "Permite colaboração em tempo real.",
@@ -464,6 +470,403 @@
       "Cobertura geográfica incompleta em algumas regiões",
       "Acessibilidade limitada para usuários de leitores de tela",
       "Navegação complexa para iniciantes"
+    ]
+  },
+  {
+    "id": "22",
+    "nome": "Mindomo",
+    "descricao": "Ferramenta para criação de mapas mentais e conceituais colaborativos, com suporte para brainstorming em grupo.",
+    "categorias": [
+      "Colaboração",
+      "Organização"
+    ],
+    "link": "https://www.mindomo.com",
+    "imagem": "https://play-lh.googleusercontent.com/a0fts9JgssmNY96xHLTebExU2qwBiDmwYybheAf8u-AQ2oFLsMmV_kvZzy1joMif5g=w240-h480-rw",
+    "vantagens": [
+      "Permite a criação de mapas mentais e conceituais colaborativos",
+      "Suporte para brainstorming em grupo",
+      "Possibilidade de criar estruturas de tópicos",
+      "Criação de gráficos de Gantt",
+      "Interface intuitiva para organização de ideias",
+      "Colaboração em tempo real"
+    ],
+    "limitações": [
+      "Versão gratuita com funcionalidades limitadas",
+      "Dependência de conexão com internet",
+      "Algumas funcionalidades avançadas disponíveis apenas na versão paga"
+    ]
+  },
+  {
+    "id": "23",
+    "nome": "Coggle",
+    "descricao": "Ferramenta para criação de mapas mentais e diagramas colaborativos em tempo real.",
+    "categorias": [
+      "Colaboração",
+      "Organização"
+    ],
+    "link": "https://coggle.it",
+    "imagem": "https://i0.wp.com/www.cristic.com/wp-content/uploads/2023/05/cristic-herramientas-tic-educativas-mapas-mentales-conceptuales-profesores-coggle-ok.png?fit=300%2C300&ssl=1",
+    "vantagens": [
+      "Colaboração em tempo real",
+      "Compartilhamento fácil dos modelos",
+      "Banco de imagens integrado",
+      "Interface intuitiva e amigável",
+      "Suporte para múltiplos usuários",
+      "Exportação em diferentes formatos"
+    ],
+    "limitações": [
+      "Versão gratuita limitada a 3 diagramas por usuário",
+      "Dependência de conexão com internet",
+      "Recursos avançados disponíveis apenas na versão paga"
+    ]
+  },
+  {
+    "id": "24",
+    "nome": "Jamboard",
+    "descricao": "Quadro branco digital integrado ao Google Meet, com recursos de escrita à mão, notas adesivas e pointer virtual.",
+    "categorias": [
+      "Colaboração",
+      "Organização"
+    ],
+    "link": "https://jamboard.google.com",
+    "imagem": "https://www.gstatic.com/images/branding/product/1x/jamboard_48dp.png",
+    "vantagens": [
+      "Integração com Google Meet",
+      "Escrita à mão facilitada",
+      "Pointer virtual para apresentações",
+      "Notas adesivas digitais",
+      "Salvamento automático na nuvem",
+      "Acesso a imagens do Google",
+      "Multiplataforma (computadores, smartphones e tablets)",
+      "Compatível com Android e iOS"
+    ],
+    "limitações": [
+      "Requer conta Google",
+      "Dependência de conexão com internet",
+      "Funcionalidades avançadas podem requerer treinamento"
+    ]
+  },
+  {
+    "id": "25",
+    "nome": "Wakelet",
+    "descricao": "Plataforma para criar coleções de conteúdo da web, com recursos de colaboração e organização de links.",
+    "categorias": [
+      "Colaboração",
+      "Organização"
+    ],
+    "link": "https://wakelet.com",
+    "imagem": "https://play-lh.googleusercontent.com/Ss2ZPvqfXzCujMTlH6SzIzsV95ov65RKu5ydrV-C2KZNAgGqHjyEkBBvawmIn6r7Fg=w240-h480-rw",
+    "vantagens": [
+      "Criação de coleções de conteúdo web",
+      "Colaboração em tempo real",
+      "Organização de links e recursos",
+      "Interface intuitiva",
+      "Compartilhamento fácil das coleções",
+      "Suporte para diferentes tipos de mídia",
+      "Ideal para curadoria de conteúdo"
+    ],
+    "limitações": [
+      "Dependência de conexão com internet",
+      "Algumas funcionalidades avançadas na versão paga",
+      "Requer conta para criar coleções"
+    ]
+  },
+  {
+    "id": "26",
+    "nome": "ClassDojo",
+    "descricao": "Plataforma de gestão comportamental que conecta professores, alunos e famílias, com sistema de pontuação para atividades e atitudes.",
+    "categorias": [
+      "Colaboração",
+      "Organização"
+    ],
+    "link": "https://www.classdojo.com",
+    "imagem": "https://img.icons8.com/?size=100&id=WL4SOs4WimZZ&format=png&color=000000",
+    "vantagens": [
+      "Integração entre professores, alunos e famílias",
+      "Sistema de pontuação comportamental",
+      "Ideal para Ensino Fundamental e Educação Infantil",
+      "Comunicação direta com as famílias",
+      "Acompanhamento do desenvolvimento dos alunos",
+      "Interface amigável e intuitiva",
+      "Recursos de gamificação básicos",
+      "Acesso via web e aplicativo móvel"
+    ],
+    "limitações": [
+      "Focado principalmente em Educação Infantil e Fundamental",
+      "Recursos de gamificação limitados",
+      "Dependência de conexão com internet",
+      "Requer engajamento das famílias"
+    ]
+  },
+  {
+    "id": "27",
+    "nome": "Classcraft",
+    "descricao": "Plataforma de gamificação educacional que transforma o currículo em um jogo de RPG, com personagens, níveis e poderes que afetam o mundo real.",
+    "categorias": [
+      "Jogos",
+      "Interatividade"
+    ],
+    "link": "https://www.classcraft.com",
+    "imagem": "https://assets.clever.com/resource-icons/apps/5a90a9021d3d0200014adbf1/icon_4c70321.png",
+    "vantagens": [
+      "Criação de experiências de RPG educacionais",
+      "Sistema de níveis e progressão",
+      "Trabalho em equipe entre alunos",
+      "Poderes com consequências reais",
+      "Adaptável a qualquer currículo",
+      "Gamificação completa do conteúdo",
+      "Interface imersiva e envolvente",
+      "Versão gratuita disponível"
+    ],
+    "limitações": [
+      "Dependência de conexão com internet",
+      "Requer planejamento prévio do professor",
+      "Versão gratuita com funcionalidades limitadas",
+      "Necessita engajamento constante dos alunos"
+    ]
+  },
+  {
+    "id": "28",
+    "nome": "Quizizz",
+    "descricao": "Ferramenta para criação de questionários gamificados com suporte para textos, imagens e vídeos nas questões.",
+    "categorias": [
+      "Jogos",
+      "Interatividade"
+    ],
+    "link": "https://quizizz.com",
+    "imagem": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/4d/d9/6c/4dd96ce1-d09e-3727-950b-7ea82297f246/AppIcon-0-0-1x_U007epad-0-0-sRGB-85-220.jpeg/230x0w.webp",
+    "vantagens": [
+      "Criação de questionários gamificados",
+      "Suporte para múltiplos tipos de mídia",
+      "Interface similar ao Kahoot",
+      "Diversos tipos de questões",
+      "Feedback imediato",
+      "Análise de desempenho",
+      "Modo síncrono e assíncrono",
+      "Recursos de gamificação"
+    ],
+    "limitações": [
+      "Dependência de conexão com internet",
+      "Versão gratuita com funcionalidades limitadas",
+      "Requer dispositivos compatíveis"
+    ]
+  },
+  {
+    "id": "29",
+    "nome": "Quizalize",
+    "descricao": "Plataforma de questionários que permite competição em equipes e acompanhamento detalhado de habilidades dos alunos.",
+    "categorias": [
+      "Jogos",
+      "Interatividade"
+    ],
+    "link": "https://www.quizalize.com",
+    "imagem": "https://pbs.twimg.com/profile_images/818438977174835201/nf-qHbzo_400x400.jpg",
+    "vantagens": [
+      "Competição em equipes",
+      "Questões discursivas",
+      "Mapeamento de habilidades por questão",
+      "Modo síncrono e assíncrono",
+      "Importação de diferentes mídias",
+      "Acompanhamento individual de desempenho",
+      "Interface intuitiva",
+      "Análise detalhada de resultados"
+    ],
+    "limitações": [
+      "Dependência de conexão com internet",
+      "Versão gratuita com funcionalidades limitadas",
+      "Requer planejamento prévio das habilidades"
+    ]
+  },
+  {
+    "id": "30",
+    "nome": "Nearpod",
+    "descricao": "Plataforma de apresentações interativas com suporte para diversos tipos de mídia e exercícios, acessível via código.",
+    "categorias": [
+      "Interatividade",
+      "Apresentações"
+    ],
+    "link": "https://nearpod.com",
+    "imagem": "https://img.icons8.com/?size=48&id=A96TmOG8T8tK&format=png",
+    "vantagens": [
+      "Apresentações interativas",
+      "Suporte para múltiplos tipos de mídia",
+      "Diversos tipos de exercícios",
+      "Acesso via código",
+      "Questões abertas e fechadas",
+      "Teste de memória",
+      "Integração com serviços de nuvem",
+      "Feedback em tempo real"
+    ],
+    "limitações": [
+      "Dependência de conexão com internet",
+      "Versão gratuita com funcionalidades limitadas",
+      "Requer dispositivos compatíveis para todos os alunos"
+    ]
+  },
+  {
+    "id": "31",
+    "nome": "Plickers",
+    "descricao": "Ferramenta para testes rápidos usando cartões físicos escaneados por celular, permitindo avaliação individual em tempo real.",
+    "categorias": [
+      "Interatividade",
+      "Jogos"
+    ],
+    "link": "https://www.plickers.com",
+    "imagem": "https://play-lh.googleusercontent.com/bOAxOZiVDnGFWLQoJIfd5NKtjZaHXnGoAc3AjRFymybCM5u19bKayIuQjnX6t8apZUI=w240-h480-rw",
+    "vantagens": [
+      "Testes rápidos com cartões físicos",
+      "Avaliação individual em tempo real",
+      "Não requer dispositivos para os alunos",
+      "Fácil de implementar em sala",
+      "Cartões personalizados por aluno",
+      "Interface simples e intuitiva",
+      "Análise imediata de resultados",
+      "Ideal para turmas grandes"
+    ],
+    "limitações": [
+      "Requer celular do professor",
+      "Necessita impressão dos cartões",
+      "Versão gratuita com funcionalidades limitadas",
+      "Dependência de boa iluminação para leitura dos cartões"
+    ]
+  },
+  {
+    "id": "32",
+    "nome": "EDpuzzle",
+    "descricao": "Ferramenta para criar vídeos interativos com questões embutidas e narração do professor.",
+    "categorias": [
+      "Vídeos",
+      "Interatividade"
+    ],
+    "link": "https://edpuzzle.com",
+    "imagem": "https://d2has6dvjv0i3b.cloudfront.net/products/edpuzzle/logo_1691245387.900741.png",
+    "vantagens": [
+      "Adição de questões em vídeos",
+      "Narração personalizada do professor",
+      "Criação de turmas",
+      "Código para embed em outras plataformas",
+      "Integração com Moodle",
+      "Acompanhamento de progresso",
+      "Interface intuitiva",
+      "Suporte para diversos tipos de vídeo"
+    ],
+    "limitações": [
+      "Dependência de conexão com internet",
+      "Versão gratuita com funcionalidades limitadas",
+      "Requer planejamento prévio do conteúdo"
+    ]
+  },
+  {
+    "id": "33",
+    "nome": "Thinglink",
+    "descricao": "Plataforma para criar imagens e vídeos interativos com etiquetas contendo diferentes tipos de mídia.",
+    "categorias": [
+      "Interatividade",
+      "Design"
+    ],
+    "link": "https://www.thinglink.com",
+    "imagem": "https://clever-partner-images.s3.amazonaws.com/library/icons/thinglink-dev-90373ef2-dev/clever_app_icon_400_400.png",
+    "vantagens": [
+      "Criação de conteúdo interativo",
+      "Suporte para múltiplos tipos de mídia",
+      "Etiquetas com som, fotos e vídeos",
+      "Código para embed em outras plataformas",
+      "Integração com Moodle",
+      "Interface intuitiva",
+      "Recursos de personalização",
+      "Compartilhamento fácil"
+    ],
+    "limitações": [
+      "Dependência de conexão com internet",
+      "Versão gratuita com funcionalidades limitadas",
+      "Requer planejamento do conteúdo interativo"
+    ]
+  },
+  {
+    "id": "34",
+    "nome": "GoConqr",
+    "descricao": "Ambiente completo de aprendizagem com recursos para criação, organização e compartilhamento de conteúdo educacional.",
+    "categorias": [
+      "Organização",
+      "Interatividade"
+    ],
+    "link": "https://www.goconqr.com",
+    "imagem": "http://www.sami.ie/files/2012/02/logo_goconqr_blue@600.png",
+    "vantagens": [
+      "Notas online com multimídia",
+      "Criação de mapas mentais",
+      "Sistema de flashcards",
+      "Apresentações em slides",
+      "Quizzes interativos",
+      "Criação de fluxogramas",
+      "Calendário de estudos",
+      "Cursos online",
+      "Grupos públicos e privados",
+      "Aplicativo móvel disponível"
+    ],
+    "limitações": [
+      "Dependência de conexão com internet",
+      "Versão gratuita com funcionalidades limitadas",
+      "Curva de aprendizado para recursos avançados",
+      "Requer organização prévia do conteúdo"
+    ]
+  },
+  {
+    "id": "35",
+    "nome": "Poll Everywhere",
+    "descricao": "Plataforma para criação de questionários interativos com resultados em tempo real, suportando múltiplos canais de resposta.",
+    "categorias": [
+      "Interatividade",
+      "Apresentações"
+    ],
+    "link": "https://www.polleverywhere.com",
+    "imagem": "https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_48d356bf2b41aa5c0c23a99ece81bccc/poll-everywhere.png",
+    "vantagens": [
+      "Resultados em tempo real",
+      "Múltiplos canais de resposta (SMS, Twitter, web)",
+      "Word Cloud em tempo real",
+      "Questões de múltipla escolha",
+      "Votações e surveys",
+      "Imagens clicáveis",
+      "Competições interativas",
+      "Integração com PowerPoint e Google Slides",
+      "Interface intuitiva",
+      "Suporte para diferentes tipos de atividades"
+    ],
+    "limitações": [
+      "Dependência de conexão com internet",
+      "Versão gratuita com funcionalidades limitadas",
+      "Limitação no número de respostas na versão gratuita",
+      "Requer dispositivos compatíveis para os participantes"
+    ]
+  },
+  {
+    "id": "36",
+    "nome": "Slido",
+    "descricao": "Plataforma para interação em reuniões e eventos, permitindo perguntas, pesquisas e feedback em tempo real.",
+    "categorias": [
+      "Interatividade",
+      "Apresentações"
+    ],
+    "link": "https://www.sli.do",
+    "imagem": "https://upload.wikimedia.org/wikipedia/commons/5/55/Slido-logo.png",
+    "vantagens": [
+      "Perguntas e pesquisas em tempo real",
+      "Chat ao vivo",
+      "Questões de múltipla escolha",
+      "Nuvem de palavras",
+      "Pesquisas com imagens",
+      "Compartilhamento de apresentações",
+      "Aplicativo para Android e iOS",
+      "Interface intuitiva",
+      "Feedback instantâneo",
+      "Integração com plataformas de apresentação"
+    ],
+    "limitações": [
+      "Dependência de conexão com internet",
+      "Versão gratuita com funcionalidades limitadas",
+      "Limitação no número de participantes na versão gratuita",
+      "Requer dispositivos compatíveis para os participantes"
     ]
   }
 ]
