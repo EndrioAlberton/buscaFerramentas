@@ -12,10 +12,6 @@ export interface Rating {
   updatedAt?: string;
 }
 
-type RatingDetails = {
-  [K in keyof Omit<Rating, 'userId' | 'userEmail' | 'userName' >]: number;
-};
-
 export interface RatingStats {
   mediaGeral: number;
   totalAvaliacoes: number;
