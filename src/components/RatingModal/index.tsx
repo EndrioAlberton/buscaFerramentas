@@ -13,7 +13,7 @@ import {
   Divider,
 } from '@mui/material';
 import { Rating, RatingStats } from '../../types/rating';
-import { addRating, getRatingStats } from '../../services/dataAccess/ratingsAccess';
+import { addRating, getRatingStats, getUserRating } from '../../services/dataAccess/ratingsAccess';
 import { useAuth } from '../../contexts/AuthContext';
 import GoogleIcon from '@mui/icons-material/Google';
 import StarIcon from '@mui/icons-material/Star';
@@ -44,16 +44,47 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
   });
   const [error, setError] = useState<string | null>(null);
   const [stats, setStats] = useState<RatingStats | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchData = async () => {
       if (isOpen) {
-        const ratingStats = await getRatingStats(toolId);
-        setStats(ratingStats);
+        try {
+          // Buscar estatísticas gerais
+          const ratingStats = await getRatingStats(toolId);
+          setStats(ratingStats);
+
+          // Buscar avaliação do usuário se estiver logado
+          if (user) {
+            const userRating = await getUserRating(toolId, user.uid);
+            if (userRating) {
+              setRatings({
+                usabilidade: userRating.usabilidade,
+                recursos: userRating.recursos,
+                design: userRating.design,
+                documentacao: userRating.documentacao,
+                gratuidade: userRating.gratuidade,
+              });
+              setIsEditing(true);
+            } else {
+              setRatings({
+                usabilidade: 0,
+                recursos: 0,
+                design: 0,
+                documentacao: 0,
+                gratuidade: 0,
+              });
+              setIsEditing(false);
+            }
+          }
+        } catch (error) {
+          console.error('Erro ao carregar dados:', error);
+          setError('Erro ao carregar dados. Tente novamente.');
+        }
       }
     };
-    fetchStats();
-  }, [isOpen, toolId]);
+    fetchData();
+  }, [isOpen, toolId, user]);
 
   const handleRatingChange = (criteriaId: keyof Rating, value: number | null) => {
     setRatings(prev => ({
@@ -90,54 +121,6 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
 
   const isValid = Object.values(ratings).every(rating => rating > 0);
 
-  if (!user) {
-    return (
-      <Dialog 
-        open={isOpen} 
-        onClose={handleClose}
-        maxWidth="sm"
-        fullWidth
-      >
-        <DialogTitle>
-          Avaliar {toolName}
-        </DialogTitle>
-        <DialogContent>
-          <Box sx={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center',
-            gap: 2,
-            py: 4 
-          }}>
-            <Typography variant="body1" gutterBottom>
-              Para avaliar esta ferramenta, você precisa fazer login com sua conta Google.
-            </Typography>
-            <Button
-              variant="outlined"
-              onClick={signInWithGoogle}
-              startIcon={<GoogleIcon />}
-              sx={{
-                borderColor: '#4285f4',
-                color: '#4285f4',
-                '&:hover': {
-                  borderColor: '#4285f4',
-                  backgroundColor: 'rgba(66, 133, 244, 0.04)'
-                }
-              }}
-            >
-              Entrar com Google
-            </Button>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="inherit">
-            Cancelar
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  }
-
   return (
     <Dialog 
       open={isOpen} 
@@ -146,7 +129,7 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
       fullWidth
     >
       <DialogTitle>
-        Avaliar {toolName}
+        {user ? (isEditing ? `Editar avaliação - ${toolName}` : `Avaliar ${toolName}`) : `Avaliações - ${toolName}`}
       </DialogTitle>
       <DialogContent>
         {error && (
@@ -167,7 +150,7 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
             </Box>
             <Stack spacing={1}>
               {RATING_CRITERIA.map(({ id, label }) => {
-                const criteriaId = id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName'>;
+                const criteriaId = id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName' | 'id' | 'createdAt' | 'updatedAt'>;
                 return (
                   <Box key={id} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Typography variant="body2">{label}</Typography>
@@ -188,44 +171,78 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
             </Stack>
           </Box>
         )}
-        <Divider sx={{ my: 2 }} />
-        <Typography variant="h6" gutterBottom>
-          Sua Avaliação
-        </Typography>
-        <Stack spacing={3} sx={{ mt: 2 }}>
-          {RATING_CRITERIA.map(({ id, label, description }) => (
-            <Box key={id}>
-              <Typography component="legend">{label}</Typography>
-              <Typography variant="body2" color="text.secondary" gutterBottom>
-                {description}
-              </Typography>
-              <MuiRating
-                name={id}
-                value={ratings[id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName'>]}
-                onChange={(_, value) => handleRatingChange(id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName'>, value)}
-                size="large"
-              />
-            </Box>
-          ))}
-        </Stack>
+        
+        {user ? (
+          <>
+            <Divider sx={{ my: 2 }} />
+            <Typography variant="h6" gutterBottom>
+              {isEditing ? 'Editar Sua Avaliação' : 'Sua Avaliação'}
+            </Typography>
+            <Stack spacing={3} sx={{ mt: 2 }}>
+              {RATING_CRITERIA.map(({ id, label, description }) => (
+                <Box key={id}>
+                  <Typography component="legend">{label}</Typography>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>
+                    {description}
+                  </Typography>
+                  <MuiRating
+                    name={id}
+                    value={ratings[id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName' | 'id' | 'createdAt' | 'updatedAt'>]}
+                    onChange={(_, value) => handleRatingChange(id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName' | 'id' | 'createdAt' | 'updatedAt'>, value)}
+                    size="large"
+                  />
+                </Box>
+              ))}
+            </Stack>
+          </>
+        ) : (
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center',
+            gap: 2,
+            py: 2 
+          }}>
+            <Typography variant="body1" gutterBottom>
+              Para avaliar esta ferramenta, você precisa fazer login com sua conta Google.
+            </Typography>
+            <Button
+              variant="outlined"
+              onClick={signInWithGoogle}
+              startIcon={<GoogleIcon />}
+              sx={{
+                borderColor: '#4285f4',
+                color: '#4285f4',
+                '&:hover': {
+                  borderColor: '#4285f4',
+                  backgroundColor: 'rgba(66, 133, 244, 0.04)'
+                }
+              }}
+            >
+              Entrar com Google
+            </Button>
+          </Box>
+        )}
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="inherit">
-          Cancelar
+          Fechar
         </Button>
-        <Button 
-          onClick={handleSubmit}
-          variant="contained"
-          disabled={!isValid}
-          sx={{ 
-            backgroundColor: '#1f4b6e',
-            '&:hover': {
-              backgroundColor: '#2f6b8e'
-            }
-          }}
-        >
-          Enviar Avaliação
-        </Button>
+        {user && (
+          <Button 
+            onClick={handleSubmit}
+            variant="contained"
+            disabled={!isValid}
+            sx={{ 
+              backgroundColor: '#1f4b6e',
+              '&:hover': {
+                backgroundColor: '#2f6b8e'
+              }
+            }}
+          >
+            {isEditing ? 'Atualizar Avaliação' : 'Enviar Avaliação'}
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   );
