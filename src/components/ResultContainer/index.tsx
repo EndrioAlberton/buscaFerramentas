@@ -1,12 +1,16 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 
-const ResultContainer: React.FC<{ cards: React.ReactNode[] }> = ({ cards }) => {
+interface ResultContainerProps {
+  children: React.ReactNode;
+}
+
+const ResultContainer: React.FC<ResultContainerProps> = ({ children }) => {
   return (
     <Grid container spacing={0} justifyContent="center" alignItems="center">
-      {cards.slice(0, 12).map((card, index) => (
+      {React.Children.map(children, (child, index) => (
         <Grid item xs={12} sm={4} md={4} key={index}>
-          {card}
+          {child}
         </Grid>
       ))}
     </Grid>

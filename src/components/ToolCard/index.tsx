@@ -22,6 +22,7 @@ interface ToolCardProps {
     limitações: string[];
   };
   openModal: (tool: any) => void;
+  setCategory: (category: string) => void;
 }
 
 const categoryColors: { [key: string]: string } = {
@@ -38,7 +39,7 @@ const categoryColors: { [key: string]: string } = {
   "nuvens de palavras": '#76d662', 
 };
 
-const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
+const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal, setCategory }) => {
   return (
     <Card sx={{ 
       padding: 0,
@@ -68,21 +69,22 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, openModal }) => {
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
             {tool.categorias.map((categoria, index) => {
               const formattedCategory = categoria.replace(/_/g, ' ').trim().toLowerCase();
-              console.log('Categoria:', categoria, 'Cor encontrada:', categoryColors[formattedCategory]);
 
               return (
                 <Chip
-                key={index}
-                label={categoria}
-                size="small"
-                variant="outlined"
-                sx={{ 
-                  backgroundColor: categoryColors[formattedCategory] || '#1976d2',
-                  color: '#ffffff', 
-                  cursor: 'default', 
-                  pointerEvents: 'none', 
-                }}
-              />
+                  key={index}
+                  label={categoria}
+                  size="small"
+                  onClick={() => setCategory(categoria)}
+                  sx={{ 
+                    backgroundColor: categoryColors[formattedCategory] || '#1976d2',
+                    color: '#ffffff',
+                    cursor: 'pointer',
+                    '&:hover': {
+                      opacity: 0.9,
+                    },
+                  }}
+                />
               );
             })}
           </Box>

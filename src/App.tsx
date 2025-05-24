@@ -83,9 +83,16 @@ const App: React.FC = () => {
             <SearchBar query={query} setQuery={setQuery} />
             <CategorySelect category={category} setCategory={setCategory} />
           </Stack>
-          <ResultContainer cards={currentItems.map(tool => (
-            <ToolCard key={tool.id} tool={tool} openModal={openModal} />
-          ))} />
+          <ResultContainer>
+            {currentItems.map((tool) => (
+              <ToolCard 
+                key={tool.id} 
+                tool={tool} 
+                openModal={openModal}
+                setCategory={setCategory}
+              />
+            ))}
+          </ResultContainer>
           <Pagination 
             totalItems={filteredData.length} 
             itemsPerPage={itemsPerPage} 
