@@ -8,6 +8,7 @@ import { readTools, resetTools } from './services/dataAccess/ferramentasAccess';
 import ResultContainer from './components/ResultContainer';
 import Pagination from './components/Pagination';
 import Modal from './components/Modal';
+import { Footer } from './components/Footer';
 import { AuthProvider } from './contexts/AuthContext';
 
 interface Tool {
@@ -103,6 +104,7 @@ const AppContent: React.FC = () => {
         </Stack>
       </Container>
       <Modal isOpen={modalOpen} tool={selectedTool} onClose={closeModal} />
+      <Footer />
     </Box>
   );
 };
