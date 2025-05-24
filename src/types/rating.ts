@@ -4,6 +4,9 @@ export interface Rating {
   design: number;
   documentacao: number;
   gratuidade: number;
+  userId?: string;
+  userEmail?: string;
+  userName?: string;
 }
 
 export interface RatingStats {

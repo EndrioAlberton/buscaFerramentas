@@ -9,9 +9,12 @@ import {
   Typography,
   Box,
   Stack,
+  Alert,
 } from '@mui/material';
 import { Rating } from '../../types/rating';
 import { addRating } from '../../services/dataAccess/ratingsAccess';
+import { useAuth } from '../../contexts/AuthContext';
+import GoogleIcon from '@mui/icons-material/Google';
 
 interface RatingModalProps {
   isOpen: boolean;
@@ -29,6 +32,7 @@ const RATING_CRITERIA = [
 ] as const;
 
 const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, toolName }) => {
+  const { user, signInWithGoogle } = useAuth();
   const [ratings, setRatings] = useState<Rating>({
     usabilidade: 0,
     recursos: 0,
@@ -36,6 +40,7 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
     documentacao: 0,
     gratuidade: 0,
   });
+  const [error, setError] = useState<string | null>(null);
 
   const handleRatingChange = (criteriaId: keyof Rating, value: number | null) => {
     setRatings(prev => ({
@@ -45,20 +50,85 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
   };
 
   const handleSubmit = async () => {
+    if (!user) {
+      setError('Você precisa estar logado para avaliar.');
+      return;
+    }
+
     try {
-      await addRating(toolId, ratings);
+      await addRating(toolId, {
+        ...ratings,
+        userId: user.uid,
+        userEmail: user.email || '',
+        userName: user.displayName || ''
+      });
       onClose();
+      setError(null);
     } catch (error) {
       console.error('Erro ao enviar avaliação:', error);
+      setError('Erro ao enviar avaliação. Tente novamente.');
     }
+  };
+
+  const handleClose = () => {
+    setError(null);
+    onClose();
   };
 
   const isValid = Object.values(ratings).every(rating => rating > 0);
 
+  if (!user) {
+    return (
+      <Dialog 
+        open={isOpen} 
+        onClose={handleClose}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>
+          Avaliar {toolName}
+        </DialogTitle>
+        <DialogContent>
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center',
+            gap: 2,
+            py: 4 
+          }}>
+            <Typography variant="body1" gutterBottom>
+              Para avaliar esta ferramenta, você precisa fazer login com sua conta Google.
+            </Typography>
+            <Button
+              variant="outlined"
+              onClick={signInWithGoogle}
+              startIcon={<GoogleIcon />}
+              sx={{
+                borderColor: '#4285f4',
+                color: '#4285f4',
+                '&:hover': {
+                  borderColor: '#4285f4',
+                  backgroundColor: 'rgba(66, 133, 244, 0.04)'
+                }
+              }}
+            >
+              Entrar com Google
+            </Button>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="inherit">
+            Cancelar
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  }
+
   return (
     <Dialog 
       open={isOpen} 
-      onClose={onClose}
+      onClose={handleClose}
       maxWidth="sm"
       fullWidth
     >
@@ -66,6 +136,11 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
         Avaliar {toolName}
       </DialogTitle>
       <DialogContent>
+        {error && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        )}
         <Stack spacing={3} sx={{ mt: 2 }}>
           {RATING_CRITERIA.map(({ id, label, description }) => (
             <Box key={id}>
@@ -84,7 +159,7 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
         </Stack>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="inherit">
+        <Button onClick={handleClose} color="inherit">
           Cancelar
         </Button>
         <Button 

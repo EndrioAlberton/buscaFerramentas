@@ -8,6 +8,7 @@ import { readTools, resetTools } from './services/dataAccess/ferramentasAccess';
 import ResultContainer from './components/ResultContainer';
 import Pagination from './components/Pagination';
 import Modal from './components/Modal';
+import { AuthProvider } from './contexts/AuthContext';
 
 interface Tool {
   id: string;
@@ -20,7 +21,7 @@ interface Tool {
   limitações: string[];
 }
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const [data, setData] = useState<Tool[]>([]);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('Todas');
@@ -103,6 +104,14 @@ const App: React.FC = () => {
       </Container>
       <Modal isOpen={modalOpen} tool={selectedTool} onClose={closeModal} />
     </Box>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 };
 

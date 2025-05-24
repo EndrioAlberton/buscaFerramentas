@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
-// TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCEMUjMAaKQEE7GGViLgrP53IzsgL-HQgI",
     authDomain: "buscarferramentasensino.firebaseapp.com",
@@ -15,5 +15,14 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+// Configurações adicionais do provedor Google
+provider.setCustomParameters({
+    prompt: 'select_account'
+});
+
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
+export { auth, provider };
