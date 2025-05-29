@@ -44,19 +44,19 @@ export const Footer = () => {
               Coordenação:
             </Typography>
             <Typography variant="body2" sx={{ mb: 1 }}>
-              Carine Bueira Loureiro
+              Profa. Carine Bueira Loureiro (MPIE/IFRS)
             </Typography>
             <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
               Colaboradora:
             </Typography>
             <Typography variant="body2" sx={{ mb: 1 }}>
-              Silvia de Castro Bertagnolli
+              Profa. Silvia de Castro Bertagnolli (MPI/IFRS)
             </Typography>
             <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
               Desenvolvimento:
             </Typography>
             <Typography variant="body2">
-              Endrio Alberton Correa Nunes
+              Bolsista de IC: Endrio Alberton Correa Nunes (SSI/IFRS)
             </Typography>
             <Typography variant="body2" sx={{ fontWeight: 'medium', mt: 1 }}>
               Contato:
