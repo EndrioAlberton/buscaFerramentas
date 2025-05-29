@@ -10,6 +10,8 @@ import Pagination from './components/Pagination';
 import Modal from './components/Modal';
 import { Footer } from './components/Footer';
 import { AuthProvider } from './contexts/AuthContext';
+import { metadata } from './metadata';
+import { Helmet } from 'react-helmet';
 
 interface Tool {
   id: string;
@@ -78,6 +80,13 @@ const AppContent: React.FC = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Helmet>
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+        <meta name="keywords" content={metadata.keywords} />
+        <meta name="robots" content={metadata.robots} />
+        <link rel="canonical" href={metadata.alternates.canonical} />
+      </Helmet>
       <Header />
       <Container maxWidth="lg" sx={{ flex: 1, py: 4 }}>
         <Stack spacing={3} alignItems="stretch">
