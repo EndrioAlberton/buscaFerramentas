@@ -23,7 +23,7 @@ export interface Metadata {
 }
 
 export const metadata: Metadata = {
-  title: "Edu Tools - Ferramentas Educacionais Digitais",
+  title: "Edu Apps - Ferramentas Educacionais Digitais",
   description: "Sistema de apoio a professores da Educação Básica em Tecnologias Digitais Educacionais. Desenvolvido como parte do projeto de Inovação Pedagógica na Educação Básica do IFRS.",
   keywords: "ferramentas educacionais, educação básica, tecnologia educacional, IFRS, inovação pedagógica, recursos digitais, ensino, apoio pedagógico, tecnologias digitais, educação, professores, ensino básico, recursos educacionais, plataforma educacional",
   robots: "all, max-image-preview:standard",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     canonical: "/"
   },
   openGraph: {
-    title: "Edu Tools - Ferramentas Educacionais Digitais",
+    title: "Edu Apps - Ferramentas Educacionais Digitais",
     description: "Sistema de apoio a professores da Educação Básica em Tecnologias Digitais Educacionais.",
     type: "website",
     image: "/edu.png",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Edu Tools - Ferramentas Educacionais Digitais",
+    title: "Edu Apps - Ferramentas Educacionais Digitais",
     description: "Sistema de apoio a professores da Educação Básica em Tecnologias Digitais Educacionais.",
     image: "/edu.png"
   },
