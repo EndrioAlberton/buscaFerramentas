@@ -11,7 +11,7 @@ import Modal from './components/Modal';
 import { Footer } from './components/Footer';
 import { AuthProvider } from './contexts/AuthContext';
 import { metadata } from './metadata';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 interface Tool {
   id: string;
