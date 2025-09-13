@@ -1,11 +1,13 @@
 import React from 'react';
-import { Button, Box, Avatar, Menu, MenuItem } from '@mui/material';
+import { Button, Box, Avatar, Menu, MenuItem, useMediaQuery, useTheme } from '@mui/material';
 import { useAuth } from '../../contexts/AuthContext';
 import GoogleIcon from '@mui/icons-material/Google';
 
 const LoginButton: React.FC = () => {
   const { user, signInWithGoogle, logout } = useAuth();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -30,16 +32,24 @@ const LoginButton: React.FC = () => {
         variant="outlined"
         onClick={signInWithGoogle}
         startIcon={<GoogleIcon />}
+        size={isSmallScreen ? 'small' : 'medium'}
         sx={{
           borderColor: '#4285f4',
           color: '#4285f4',
+          textTransform: 'none',
+          whiteSpace: 'nowrap',
+          lineHeight: 1.2,
+          px: { xs: 1.25, sm: 2 },
+          py: { xs: 0.5, sm: 1 },
+          fontSize: { xs: '0.75rem', sm: '0.875rem' },
+          minWidth: { xs: 'auto', sm: 64 },
           '&:hover': {
             borderColor: '#4285f4',
             backgroundColor: 'rgba(66, 133, 244, 0.04)'
           }
         }}
       >
-        Entrar com Google
+        {isSmallScreen ? 'Entrar' : 'Entrar com Google'}
       </Button>
     );
   }
