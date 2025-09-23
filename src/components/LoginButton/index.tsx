@@ -31,7 +31,7 @@ const LoginButton: React.FC = () => {
       <Button
         variant="outlined"
         onClick={signInWithGoogle}
-        startIcon={<GoogleIcon />}
+        startIcon={!isSmallScreen ? <GoogleIcon /> : undefined}
         size={isSmallScreen ? 'small' : 'medium'}
         sx={{
           borderColor: '#4285f4',
@@ -39,17 +39,19 @@ const LoginButton: React.FC = () => {
           textTransform: 'none',
           whiteSpace: 'nowrap',
           lineHeight: 1.2,
-          px: { xs: 1.25, sm: 2 },
+          px: { xs: 1, sm: 2 },
           py: { xs: 0.5, sm: 1 },
           fontSize: { xs: '0.75rem', sm: '0.875rem' },
-          minWidth: { xs: 'auto', sm: 64 },
+          minWidth: { xs: 40, sm: 64 },
+          width: { xs: 40, sm: 'auto' },
+          height: { xs: 40, sm: 'auto' },
           '&:hover': {
             borderColor: '#4285f4',
             backgroundColor: 'rgba(66, 133, 244, 0.04)'
           }
         }}
       >
-        {isSmallScreen ? 'Entrar' : 'Entrar com Google'}
+        {isSmallScreen ? <GoogleIcon /> : 'Entrar com Google'}
       </Button>
     );
   }
