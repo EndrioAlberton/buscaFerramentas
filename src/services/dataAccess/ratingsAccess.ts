@@ -1,9 +1,11 @@
 import { db } from '../../firebaseConfig';
-import { collection, doc, getDoc, addDoc, setDoc, query, where, getDocs } from 'firebase/firestore';
-import { Rating, RatingStats } from '../../types/rating';
+import { collection, doc, getDoc, addDoc, setDoc, query, where, getDocs, orderBy, limit } from 'firebase/firestore';
+import { Rating, RatingStats, PedagogicalFeedback, PedagogicalFeedbackStats } from '../../types/rating';
 
 const RATINGS_COLLECTION = 'ratings';
 const RATING_STATS_COLLECTION = 'ratingStats';
+const PEDAGOGICAL_FEEDBACK_COLLECTION = 'pedagogicalFeedbacks';
+const PEDAGOGICAL_STATS_COLLECTION = 'pedagogicalStats';
 
 export const getRatingStats = async (toolId: number | string): Promise<RatingStats | null> => {
   if (toolId === undefined || toolId === null) {
@@ -157,5 +159,154 @@ const calcularNovaMediaCriterio = (
   } else {
     // Se é uma nova avaliação
     return (valorAtual * totalAtual + novoValor) / (totalAtual + 1);
+  }
+};
+
+// ============= PEDAGOGICAL FEEDBACK FUNCTIONS =============
+
+export const getPedagogicalFeedbackStats = async (toolId: number | string): Promise<PedagogicalFeedbackStats | null> => {
+  if (toolId === undefined || toolId === null) {
+    console.error('ID da ferramenta não fornecido');
+    return null;
+  }
+
+  try {
+    const docRef = doc(db, PEDAGOGICAL_STATS_COLLECTION, toolId.toString());
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      return docSnap.data() as PedagogicalFeedbackStats;
+    }
+    
+    return null;
+  } catch (error) {
+    console.error('Erro ao buscar estatísticas de feedback pedagógico:', error);
+    return null;
+  }
+};
+
+export const getUserPedagogicalFeedback = async (toolId: number | string, userId: string): Promise<PedagogicalFeedback | null> => {
+  try {
+    const feedbacksRef = collection(db, PEDAGOGICAL_FEEDBACK_COLLECTION);
+    const q = query(feedbacksRef, 
+      where('toolId', '==', toolId.toString()),
+      where('userId', '==', userId)
+    );
+    
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      const doc = querySnapshot.docs[0];
+      return { id: doc.id, ...doc.data() } as PedagogicalFeedback & { id: string };
+    }
+    
+    return null;
+  } catch (error) {
+    console.error('Erro ao buscar feedback pedagógico do usuário:', error);
+    return null;
+  }
+};
+
+export const addPedagogicalFeedback = async (toolId: number | string, feedback: PedagogicalFeedback): Promise<void> => {
+  if (toolId === undefined || toolId === null) {
+    throw new Error('ID da ferramenta não fornecido');
+  }
+
+  try {
+    // Verifica se já existe um feedback do usuário
+    const existingFeedback = await getUserPedagogicalFeedback(toolId, feedback.userId!);
+    let oldFeedback: PedagogicalFeedback | null = null;
+
+    if (existingFeedback) {
+      // Se existir, atualiza o feedback existente
+      oldFeedback = existingFeedback;
+      if (!existingFeedback.id) throw new Error('ID do feedback não encontrado');
+      await setDoc(doc(db, PEDAGOGICAL_FEEDBACK_COLLECTION, existingFeedback.id), {
+        toolId: toolId.toString(),
+        ...feedback,
+        updatedAt: new Date().toISOString()
+      });
+    } else {
+      // Se não existir, cria um novo feedback
+      await addDoc(collection(db, PEDAGOGICAL_FEEDBACK_COLLECTION), {
+        toolId: toolId.toString(),
+        ...feedback,
+        createdAt: new Date().toISOString()
+      });
+    }
+
+    // Atualiza as estatísticas
+    await updatePedagogicalStats(toolId, feedback, oldFeedback);
+  } catch (error) {
+    console.error('Erro ao adicionar feedback pedagógico:', error);
+    throw error;
+  }
+};
+
+const updatePedagogicalStats = async (
+  toolId: number | string, 
+  novoFeedback: PedagogicalFeedback, 
+  oldFeedback: PedagogicalFeedback | null
+): Promise<void> => {
+  const statsRef = doc(db, PEDAGOGICAL_STATS_COLLECTION, toolId.toString());
+  const statsDoc = await getDoc(statsRef);
+
+  // Busca os últimos comentários
+  const feedbacksRef = collection(db, PEDAGOGICAL_FEEDBACK_COLLECTION);
+  const q = query(
+    feedbacksRef,
+    where('toolId', '==', toolId.toString()),
+    orderBy('createdAt', 'desc'),
+    limit(10)
+  );
+  const querySnapshot = await getDocs(q);
+  const comentarios = querySnapshot.docs.map(doc => {
+    const data = doc.data();
+    return {
+      userName: data.userName || 'Anônimo',
+      nivelEnsino: data.nivelEnsino,
+      recomendacao: data.recomendacao,
+      comentario: data.comentario,
+      createdAt: data.createdAt || new Date().toISOString()
+    };
+  });
+
+  if (!statsDoc.exists()) {
+    // Criar novas estatísticas se não existirem
+    const newStats: PedagogicalFeedbackStats = {
+      mediaRecomendacao: novoFeedback.recomendacao,
+      totalFeedbacks: 1,
+      distribuicaoNiveis: { [novoFeedback.nivelEnsino]: 1 },
+      comentarios
+    };
+    await setDoc(statsRef, newStats);
+  } else {
+    // Atualizar estatísticas existentes
+    const stats = statsDoc.data() as PedagogicalFeedbackStats;
+    
+    // Calcula nova média
+    let novaMedia: number;
+    if (oldFeedback) {
+      novaMedia = stats.mediaRecomendacao + (novoFeedback.recomendacao - oldFeedback.recomendacao) / stats.totalFeedbacks;
+    } else {
+      novaMedia = (stats.mediaRecomendacao * stats.totalFeedbacks + novoFeedback.recomendacao) / (stats.totalFeedbacks + 1);
+    }
+
+    // Atualiza distribuição de níveis
+    const novaDistribuicao = { ...stats.distribuicaoNiveis };
+    if (oldFeedback && oldFeedback.nivelEnsino !== novoFeedback.nivelEnsino) {
+      novaDistribuicao[oldFeedback.nivelEnsino] = (novaDistribuicao[oldFeedback.nivelEnsino] || 1) - 1;
+      if (novaDistribuicao[oldFeedback.nivelEnsino] <= 0) {
+        delete novaDistribuicao[oldFeedback.nivelEnsino];
+      }
+    }
+    novaDistribuicao[novoFeedback.nivelEnsino] = (novaDistribuicao[novoFeedback.nivelEnsino] || 0) + 1;
+
+    const novasStats: PedagogicalFeedbackStats = {
+      mediaRecomendacao: novaMedia,
+      totalFeedbacks: oldFeedback ? stats.totalFeedbacks : stats.totalFeedbacks + 1,
+      distribuicaoNiveis: novaDistribuicao,
+      comentarios
+    };
+    await setDoc(statsRef, novasStats);
   }
 }; 
