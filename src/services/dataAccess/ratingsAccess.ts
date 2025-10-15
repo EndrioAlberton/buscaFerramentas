@@ -1,5 +1,5 @@
 import { db } from '../../firebaseConfig';
-import { collection, doc, getDoc, addDoc, setDoc, query, where, getDocs, orderBy, limit } from 'firebase/firestore';
+import { collection, doc, getDoc, addDoc, setDoc, query, where, getDocs, orderBy } from 'firebase/firestore';
 import { Rating, RatingStats, PedagogicalFeedback, PedagogicalFeedbackStats } from '../../types/rating';
 
 const RATINGS_COLLECTION = 'ratings';
@@ -66,6 +66,7 @@ export const addRating = async (toolId: number | string, rating: Rating): Promis
       await setDoc(doc(db, RATINGS_COLLECTION, existingRating.id), {
         toolId: toolId.toString(),
         ...rating,
+        createdAt: existingRating.createdAt || new Date().toISOString(), // Preserva a data de criação original
         updatedAt: new Date().toISOString()
       });
     } else {
@@ -223,6 +224,7 @@ export const addPedagogicalFeedback = async (toolId: number | string, feedback: 
       await setDoc(doc(db, PEDAGOGICAL_FEEDBACK_COLLECTION, existingFeedback.id), {
         toolId: toolId.toString(),
         ...feedback,
+        createdAt: existingFeedback.createdAt || new Date().toISOString(), // Preserva a data de criação original
         updatedAt: new Date().toISOString()
       });
     } else {
@@ -250,20 +252,25 @@ const updatePedagogicalStats = async (
   const statsRef = doc(db, PEDAGOGICAL_STATS_COLLECTION, toolId.toString());
   const statsDoc = await getDoc(statsRef);
 
-  // Busca os últimos comentários
+  // Busca todos os comentários da ferramenta
   const feedbacksRef = collection(db, PEDAGOGICAL_FEEDBACK_COLLECTION);
   const q = query(
     feedbacksRef,
     where('toolId', '==', toolId.toString()),
-    orderBy('createdAt', 'desc'),
-    limit(10)
+    orderBy('createdAt', 'desc')
   );
   const querySnapshot = await getDocs(q);
   const comentarios = querySnapshot.docs.map(doc => {
     const data = doc.data();
+    // Compatibilidade com dados antigos que tinham nivelEnsino (singular)
+    let niveisEnsino = data.niveisEnsino || [];
+    if (!niveisEnsino.length && data.nivelEnsino) {
+      niveisEnsino = [data.nivelEnsino];
+    }
+    
     return {
       userName: data.userName || 'Anônimo',
-      nivelEnsino: data.nivelEnsino,
+      niveisEnsino: niveisEnsino,
       recomendacao: data.recomendacao,
       comentario: data.comentario,
       createdAt: data.createdAt || new Date().toISOString()
@@ -272,10 +279,17 @@ const updatePedagogicalStats = async (
 
   if (!statsDoc.exists()) {
     // Criar novas estatísticas se não existirem
+    const distribuicaoInicial: Record<string, number> = {};
+    if (novoFeedback.niveisEnsino && Array.isArray(novoFeedback.niveisEnsino)) {
+      novoFeedback.niveisEnsino.forEach(nivel => {
+        distribuicaoInicial[nivel] = (distribuicaoInicial[nivel] || 0) + 1;
+      });
+    }
+    
     const newStats: PedagogicalFeedbackStats = {
       mediaRecomendacao: novoFeedback.recomendacao,
-      totalFeedbacks: 1,
-      distribuicaoNiveis: { [novoFeedback.nivelEnsino]: 1 },
+      totalFeedbacks: comentarios.length,
+      distribuicaoNiveis: distribuicaoInicial,
       comentarios
     };
     await setDoc(statsRef, newStats);
@@ -291,19 +305,35 @@ const updatePedagogicalStats = async (
       novaMedia = (stats.mediaRecomendacao * stats.totalFeedbacks + novoFeedback.recomendacao) / (stats.totalFeedbacks + 1);
     }
 
-    // Atualiza distribuição de níveis
     const novaDistribuicao = { ...stats.distribuicaoNiveis };
-    if (oldFeedback && oldFeedback.nivelEnsino !== novoFeedback.nivelEnsino) {
-      novaDistribuicao[oldFeedback.nivelEnsino] = (novaDistribuicao[oldFeedback.nivelEnsino] || 1) - 1;
-      if (novaDistribuicao[oldFeedback.nivelEnsino] <= 0) {
-        delete novaDistribuicao[oldFeedback.nivelEnsino];
+    
+    if (oldFeedback) {
+      let niveisAntigos = oldFeedback.niveisEnsino;
+      if (!niveisAntigos || !Array.isArray(niveisAntigos)) {
+        const oldData = oldFeedback as unknown as { nivelEnsino?: string };
+        niveisAntigos = oldData.nivelEnsino ? [oldData.nivelEnsino] : [];
       }
+      
+      niveisAntigos.forEach(nivel => {
+        if (nivel) {
+          novaDistribuicao[nivel] = (novaDistribuicao[nivel] || 1) - 1;
+          if (novaDistribuicao[nivel] <= 0) {
+            delete novaDistribuicao[nivel];
+          }
+        }
+      });
     }
-    novaDistribuicao[novoFeedback.nivelEnsino] = (novaDistribuicao[novoFeedback.nivelEnsino] || 0) + 1;
+    
+    // Adiciona novos níveis
+    if (novoFeedback.niveisEnsino && Array.isArray(novoFeedback.niveisEnsino)) {
+      novoFeedback.niveisEnsino.forEach(nivel => {
+        novaDistribuicao[nivel] = (novaDistribuicao[nivel] || 0) + 1;
+      });
+    }
 
     const novasStats: PedagogicalFeedbackStats = {
       mediaRecomendacao: novaMedia,
-      totalFeedbacks: oldFeedback ? stats.totalFeedbacks : stats.totalFeedbacks + 1,
+      totalFeedbacks: comentarios.length,
       distribuicaoNiveis: novaDistribuicao,
       comentarios
     };

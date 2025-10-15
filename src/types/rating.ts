@@ -17,9 +17,9 @@ export interface PedagogicalFeedback {
   userId?: string;
   userEmail?: string;
   userName?: string;
-  nivelEnsino: string;
-  recomendacao: number; // 0 a 10
-  comentario: string;
+  niveisEnsino: string[]; 
+  recomendacao: number; 
+  comentario?: string;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -42,9 +42,9 @@ export interface PedagogicalFeedbackStats {
   distribuicaoNiveis: Record<string, number>;
   comentarios: Array<{
     userName: string;
-    nivelEnsino: string;
+    niveisEnsino: string[];
     recomendacao: number;
-    comentario: string;
+    comentario?: string; 
     createdAt: string;
   }>;
 } 
