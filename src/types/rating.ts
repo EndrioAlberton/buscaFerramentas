@@ -17,13 +17,12 @@ export interface PedagogicalFeedback {
   userId?: string;
   userEmail?: string;
   userName?: string;
-  niveisEnsino: string[]; 
-  recomendacao: number; 
+  niveisEnsino: string[];
+  recomendacao: number;
   comentario?: string;
   createdAt?: string;
   updatedAt?: string;
 }
-
 export interface RatingStats {
   mediaGeral: number;
   totalAvaliacoes: number;
@@ -44,7 +43,7 @@ export interface PedagogicalFeedbackStats {
     userName: string;
     niveisEnsino: string[];
     recomendacao: number;
-    comentario?: string; 
+    comentario?: string;
     createdAt: string;
   }>;
-} 
+}
