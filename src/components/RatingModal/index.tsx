@@ -11,12 +11,29 @@ import {
   Stack,
   Alert,
   Divider,
+  Tabs,
+  Tab,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  TextField,
+  Chip,
 } from '@mui/material';
-import { Rating, RatingStats } from '../../types/rating';
-import { addRating, getRatingStats, getUserRating } from '../../services/dataAccess/ratingsAccess';
+import { Rating, RatingStats, PedagogicalFeedback, PedagogicalFeedbackStats } from '../../types/rating';
+import { 
+  addRating, 
+  getRatingStats, 
+  getUserRating,
+  addPedagogicalFeedback,
+  getPedagogicalFeedbackStats,
+  getUserPedagogicalFeedback
+} from '../../services/dataAccess/ratingsAccess';
 import { useAuth } from '../../contexts/AuthContext';
 import GoogleIcon from '@mui/icons-material/Google';
 import StarIcon from '@mui/icons-material/Star';
+import SchoolIcon from '@mui/icons-material/School';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 interface RatingModalProps {
   isOpen: boolean;
@@ -33,8 +50,27 @@ const RATING_CRITERIA = [
   { id: 'gratuidade', label: 'Gratuidade', description: 'Disponibilidade de recursos gratuitos' },
 ] as const;
 
+const NIVEIS_ENSINO = [
+  'Educação Infantil',
+  '1º ano - Ensino Fundamental',
+  '2º ano - Ensino Fundamental',
+  '3º ano - Ensino Fundamental',
+  '4º ano - Ensino Fundamental',
+  '5º ano - Ensino Fundamental',
+  '6º ano - Ensino Fundamental',
+  '7º ano - Ensino Fundamental',
+  '8º ano - Ensino Fundamental',
+  '9º ano - Ensino Fundamental',
+  '1º ano - Ensino Médio',
+  '2º ano - Ensino Médio',
+  '3º ano - Ensino Médio',
+] as const;
+
 const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, toolName }) => {
   const { user, signInWithGoogle } = useAuth();
+  const [tabValue, setTabValue] = useState(0);
+  
+  // Estados para avaliação por critérios
   const [ratings, setRatings] = useState<Rating>({
     usabilidade: 0,
     recursos: 0,
@@ -42,17 +78,31 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
     documentacao: 0,
     gratuidade: 0,
   });
-  const [error, setError] = useState<string | null>(null);
   const [stats, setStats] = useState<RatingStats | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+
+  // Estados para feedback pedagógico
+  const [pedagogicalFeedback, setPedagogicalFeedback] = useState<PedagogicalFeedback>({
+    niveisEnsino: [],
+    recomendacao: 0,
+    comentario: '',
+  });
+  const [pedagogicalStats, setPedagogicalStats] = useState<PedagogicalFeedbackStats | null>(null);
+  const [isPedagogicalEditing, setIsPedagogicalEditing] = useState(false);
+
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       if (isOpen) {
         try {
-          // Buscar estatísticas gerais
+          // Buscar estatísticas gerais de critérios
           const ratingStats = await getRatingStats(toolId);
           setStats(ratingStats);
+
+          // Buscar estatísticas de feedback pedagógico
+          const pedStats = await getPedagogicalFeedbackStats(toolId);
+          setPedagogicalStats(pedStats);
 
           // Buscar avaliação do usuário se estiver logado
           if (user) {
@@ -76,6 +126,24 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
               });
               setIsEditing(false);
             }
+
+            // Buscar feedback pedagógico do usuário
+            const userPedFeedback = await getUserPedagogicalFeedback(toolId, user.uid);
+            if (userPedFeedback) {
+              setPedagogicalFeedback({
+                niveisEnsino: userPedFeedback.niveisEnsino,
+                recomendacao: userPedFeedback.recomendacao,
+                comentario: userPedFeedback.comentario || '',
+              });
+              setIsPedagogicalEditing(true);
+            } else {
+              setPedagogicalFeedback({
+                niveisEnsino: [],
+                recomendacao: 0,
+                comentario: '',
+              });
+              setIsPedagogicalEditing(false);
+            }
           }
         } catch (error) {
           console.error('Erro ao carregar dados:', error);
@@ -93,6 +161,13 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
     }));
   };
 
+  const handlePedagogicalChange = (field: keyof PedagogicalFeedback, value: string | number | string[]) => {
+    setPedagogicalFeedback(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
   const handleSubmit = async () => {
     if (!user) {
       setError('Você precisa estar logado para avaliar.');
@@ -100,12 +175,23 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
     }
 
     try {
-      await addRating(toolId, {
-        ...ratings,
-        userId: user.uid,
-        userEmail: user.email || '',
-        userName: user.displayName || ''
-      });
+      if (tabValue === 0) {
+        // Enviar avaliação por critérios
+        await addRating(toolId, {
+          ...ratings,
+          userId: user.uid,
+          userEmail: user.email || 'sem-email@exemplo.com',
+          userName: user.displayName || 'Usuário Anônimo'
+        });
+      } else {
+        // Enviar feedback pedagógico
+        await addPedagogicalFeedback(toolId, {
+          ...pedagogicalFeedback,
+          userId: user.uid,
+          userEmail: user.email || 'sem-email@exemplo.com',
+          userName: user.displayName || 'Usuário Anônimo'
+        });
+      }
       onClose();
       setError(null);
     } catch (error) {
@@ -119,13 +205,16 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
     onClose();
   };
 
-  const isValid = Object.values(ratings).every(rating => rating > 0);
+  const isValidCriteria = Object.values(ratings).every(rating => rating > 0);
+  const isValidPedagogical = pedagogicalFeedback.niveisEnsino.length > 0 && 
+                             pedagogicalFeedback.recomendacao > 0;
+  const isValid = tabValue === 0 ? isValidCriteria : isValidPedagogical;
 
   return (
     <Dialog 
       open={isOpen} 
       onClose={handleClose}
-      maxWidth="sm"
+      maxWidth="md"
       fullWidth
     >
       <DialogTitle>
@@ -137,91 +226,309 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
             {error}
           </Alert>
         )}
-        {stats && (
-          <Box sx={{ mb: 3 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-              <StarIcon sx={{ color: '#fbc02d' }} />
-              <Typography variant="h6" component="span">
-                {stats.mediaGeral.toFixed(1)}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                ({stats.totalAvaliacoes} {stats.totalAvaliacoes === 1 ? 'avaliação' : 'avaliações'})
-              </Typography>
-            </Box>
-            <Stack spacing={1}>
-              {RATING_CRITERIA.map(({ id, label }) => {
-                const criteriaId = id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName' | 'id' | 'createdAt' | 'updatedAt'>;
-                return (
-                  <Box key={id} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <Typography variant="body2">{label}</Typography>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <MuiRating
-                        value={stats.detalhes[criteriaId]}
-                        precision={0.1}
-                        readOnly
-                        size="small"
-                      />
-                      <Typography variant="body2" color="text.secondary">
-                        ({stats.detalhes[criteriaId].toFixed(1)})
-                      </Typography>
-                    </Box>
-                  </Box>
-                );
-              })}
-            </Stack>
-          </Box>
-        )}
-        
-        {user ? (
+
+        <Tabs 
+          value={tabValue} 
+          onChange={(_, newValue) => setTabValue(newValue)}
+          sx={{ borderBottom: 1, borderColor: 'divider', mb: 2 }}
+        >
+          <Tab 
+            icon={<StarIcon />} 
+            iconPosition="start"
+            label="Avaliação por Critérios" 
+          />
+          <Tab 
+            icon={<SchoolIcon />} 
+            iconPosition="start"
+            label="Feedback Pedagógico" 
+          />
+        </Tabs>
+
+        {/* Aba de Avaliação por Critérios */}
+        {tabValue === 0 && (
           <>
-            <Divider sx={{ my: 2 }} />
-            <Typography variant="h6" gutterBottom>
-              {isEditing ? 'Editar Sua Avaliação' : 'Sua Avaliação'}
-            </Typography>
-            <Stack spacing={3} sx={{ mt: 2 }}>
-              {RATING_CRITERIA.map(({ id, label, description }) => (
-                <Box key={id}>
-                  <Typography component="legend">{label}</Typography>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    {description}
+            {stats && (
+              <Box sx={{ mb: 3 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+                  <StarIcon sx={{ color: '#fbc02d' }} />
+                  <Typography variant="h6" component="span">
+                    {stats.mediaGeral.toFixed(1)}
                   </Typography>
-                  <MuiRating
-                    name={id}
-                    value={ratings[id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName' | 'id' | 'createdAt' | 'updatedAt'>]}
-                    onChange={(_, value) => handleRatingChange(id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName' | 'id' | 'createdAt' | 'updatedAt'>, value)}
-                    size="large"
-                  />
+                  <Typography variant="body2" color="text.secondary">
+                    ({stats.totalAvaliacoes} {stats.totalAvaliacoes === 1 ? 'avaliação' : 'avaliações'})
+                  </Typography>
                 </Box>
-              ))}
-            </Stack>
+                <Stack spacing={1}>
+                  {RATING_CRITERIA.map(({ id, label }) => {
+                    const criteriaId = id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName' | 'id' | 'createdAt' | 'updatedAt'>;
+                    return (
+                      <Box key={id} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Typography variant="body2">{label}</Typography>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                          <MuiRating
+                            value={stats.detalhes[criteriaId]}
+                            precision={0.1}
+                            readOnly
+                            size="small"
+                          />
+                          <Typography variant="body2" color="text.secondary">
+                            ({stats.detalhes[criteriaId].toFixed(1)})
+                          </Typography>
+                        </Box>
+                      </Box>
+                    );
+                  })}
+                </Stack>
+              </Box>
+            )}
+            
+            {user ? (
+              <>
+                <Divider sx={{ my: 2 }} />
+                <Typography variant="h6" gutterBottom>
+                  {isEditing ? 'Editar Sua Avaliação' : 'Sua Avaliação'}
+                </Typography>
+                <Stack spacing={3} sx={{ mt: 2 }}>
+                  {RATING_CRITERIA.map(({ id, label, description }) => (
+                    <Box key={id}>
+                      <Typography component="legend">{label}</Typography>
+                      <Typography variant="body2" color="text.secondary" gutterBottom>
+                        {description}
+                      </Typography>
+                      <MuiRating
+                        name={id}
+                        value={ratings[id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName' | 'id' | 'createdAt' | 'updatedAt'>]}
+                        onChange={(_, value) => handleRatingChange(id as keyof Omit<Rating, 'userId' | 'userEmail' | 'userName' | 'id' | 'createdAt' | 'updatedAt'>, value)}
+                        size="large"
+                      />
+                    </Box>
+                  ))}
+                </Stack>
+              </>
+            ) : (
+              <Box sx={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center',
+                gap: 2,
+                py: 2 
+              }}>
+                <Typography variant="body1" gutterBottom>
+                  Para avaliar esta ferramenta, você precisa fazer login com sua conta Google.
+                </Typography>
+                <Button
+                  variant="outlined"
+                  onClick={signInWithGoogle}
+                  startIcon={<GoogleIcon />}
+                  sx={{
+                    borderColor: '#4285f4',
+                    color: '#4285f4',
+                    '&:hover': {
+                      borderColor: '#4285f4',
+                      backgroundColor: 'rgba(66, 133, 244, 0.04)'
+                    }
+                  }}
+                >
+                  Entrar com Google
+                </Button>
+              </Box>
+            )}
           </>
-        ) : (
-          <Box sx={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center',
-            gap: 2,
-            py: 2 
-          }}>
-            <Typography variant="body1" gutterBottom>
-              Para avaliar esta ferramenta, você precisa fazer login com sua conta Google.
-            </Typography>
-            <Button
-              variant="outlined"
-              onClick={signInWithGoogle}
-              startIcon={<GoogleIcon />}
-              sx={{
-                borderColor: '#4285f4',
-                color: '#4285f4',
-                '&:hover': {
-                  borderColor: '#4285f4',
-                  backgroundColor: 'rgba(66, 133, 244, 0.04)'
-                }
-              }}
-            >
-              Entrar com Google
-            </Button>
-          </Box>
+        )}
+
+        {/* Aba de Feedback Pedagógico */}
+        {tabValue === 1 && (
+          <>
+            {pedagogicalStats && pedagogicalStats.comentarios.length > 0 ? (
+              <Box sx={{ mb: 3 }}>
+                <Typography variant="body2" gutterBottom fontWeight="bold" sx={{ mb: 2 }}>
+                  Feedbacks ({pedagogicalStats.comentarios.length}):
+                </Typography>
+                <Stack spacing={2} sx={{ maxHeight: 400, overflowY: 'auto', pr: 1 }}>
+                  {pedagogicalStats.comentarios.map((feedback, index) => (
+                    <Box 
+                      key={index}
+                      sx={{ 
+                        p: 2, 
+                        backgroundColor: '#f5f5f5', 
+                        borderRadius: 1,
+                        borderLeft: '3px solid #1f4b6e'
+                      }}
+                    >
+                      <Typography variant="body2" fontWeight="bold" color="primary" sx={{ mb: 1 }}>
+                        {feedback.userName}
+                      </Typography>
+                      
+                      {feedback.comentario && (
+                        <Typography variant="body2" sx={{ mb: 1.5 }}>
+                          {feedback.comentario}
+                        </Typography>
+                      )}
+                      
+                      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                          <ThumbUpIcon sx={{ fontSize: 18, color: '#1f4b6e' }} />
+                          <Typography variant="body2" fontWeight="bold" color="primary">
+                            {feedback.recomendacao}/10
+                          </Typography>
+                        </Box>
+                        
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                          {feedback.niveisEnsino.map((nivel, idx) => (
+                            <Chip 
+                              key={idx}
+                              label={nivel}
+                              size="small"
+                              sx={{ 
+                                backgroundColor: '#e3f2fd',
+                                fontSize: '0.7rem',
+                                height: 20
+                              }}
+                            />
+                          ))}
+                        </Box>
+                      </Box>
+                    </Box>
+                  ))}
+                </Stack>
+              </Box>
+            ) : (
+              <Box sx={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center',
+                gap: 1,
+                py: 3 
+              }}>
+                <Typography variant="body2" color="text.secondary">
+                  Nenhum feedback pedagógico ainda.
+                </Typography>
+                <Typography variant="caption" color="text.secondary">
+                  Seja o primeiro a avaliar!
+                </Typography>
+              </Box>
+            )}
+
+            {user ? (
+              <>
+                <Divider sx={{ my: 2 }} />
+                <Typography variant="h6" gutterBottom>
+                  {isPedagogicalEditing ? 'Editar Seu Feedback' : 'Seu Feedback Pedagógico'}
+                </Typography>
+                
+                <Stack spacing={3} sx={{ mt: 2 }}>
+                <Box>
+                  <FormControl fullWidth required>
+                    <InputLabel>Selecione os Níveis de Ensino *</InputLabel>
+                    <Select
+                      value=""
+                      label="Selecione os Níveis de Ensino *"
+                      onChange={(e) => {
+                        const selectedNivel = e.target.value as string;
+                        if (selectedNivel && !pedagogicalFeedback.niveisEnsino.includes(selectedNivel)) {
+                          handlePedagogicalChange('niveisEnsino', [...pedagogicalFeedback.niveisEnsino, selectedNivel]);
+                        }
+                      }}
+                    >
+                      {NIVEIS_ENSINO.map((nivel) => (
+                        <MenuItem 
+                          key={nivel} 
+                          value={nivel}
+                          disabled={pedagogicalFeedback.niveisEnsino.includes(nivel)}
+                        >
+                          {nivel}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  
+                  {pedagogicalFeedback.niveisEnsino.length > 0 && (
+                    <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                      {pedagogicalFeedback.niveisEnsino.map((nivel) => (
+                        <Chip
+                          key={nivel}
+                          label={nivel}
+                          onDelete={() => {
+                            const novosNiveis = pedagogicalFeedback.niveisEnsino.filter(n => n !== nivel);
+                            handlePedagogicalChange('niveisEnsino', novosNiveis);
+                          }}
+                          sx={{
+                            backgroundColor: '#e3f2fd',
+                            '& .MuiChip-deleteIcon': {
+                              color: '#1f4b6e',
+                              '&:hover': {
+                                color: '#d32f2f'
+                              }
+                            }
+                          }}
+                        />
+                      ))}
+                    </Box>
+                  )}
+                </Box>
+
+                <Box>
+                  <Typography component="legend" gutterBottom>
+                    Recomendação * (0 = Não recomendaria, 10 = Recomendaria fortemente)
+                  </Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Typography variant="body2" color="text.secondary">0</Typography>
+                    <MuiRating
+                      name="recomendacao"
+                      value={pedagogicalFeedback.recomendacao / 2}
+                      max={5}
+                      precision={0.5}
+                      size="large"
+                      onChange={(_, value) => handlePedagogicalChange('recomendacao', (value || 0) * 2)}
+                    />
+                    <Typography variant="body2" color="text.secondary">10</Typography>
+                    <Typography variant="h6" sx={{ ml: 2, color: '#1f4b6e' }}>
+                      {pedagogicalFeedback.recomendacao.toFixed(1)}
+                    </Typography>
+                  </Box>
+                </Box>
+
+                <TextField
+                  label="Comente sobre os potenciais da ferramenta (opcional)"
+                  multiline
+                  rows={4}
+                  fullWidth
+                  value={pedagogicalFeedback.comentario}
+                  onChange={(e) => handlePedagogicalChange('comentario', e.target.value)}
+                  placeholder="Compartilhe sua experiência usando esta ferramenta em sala de aula..."
+                  helperText={`${pedagogicalFeedback.comentario?.length || 0} caracteres`}
+                />
+              </Stack>
+              </>
+            ) : (
+              <Box sx={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center',
+                gap: 2,
+                py: 2 
+              }}>
+                <Typography variant="body1" gutterBottom>
+                  Para enviar feedback pedagógico, você precisa fazer login com sua conta Google.
+                </Typography>
+                <Button
+                  variant="outlined"
+                  onClick={signInWithGoogle}
+                  startIcon={<GoogleIcon />}
+                  sx={{
+                    borderColor: '#4285f4',
+                    color: '#4285f4',
+                    '&:hover': {
+                      borderColor: '#4285f4',
+                      backgroundColor: 'rgba(66, 133, 244, 0.04)'
+                    }
+                  }}
+                >
+                  Entrar com Google
+                </Button>
+              </Box>
+            )}
+          </>
         )}
       </DialogContent>
       <DialogActions>
@@ -240,7 +547,9 @@ const RatingModal: React.FC<RatingModalProps> = ({ isOpen, onClose, toolId, tool
               }
             }}
           >
-            {isEditing ? 'Atualizar Avaliação' : 'Enviar Avaliação'}
+            {(tabValue === 0 && isEditing) || (tabValue === 1 && isPedagogicalEditing) 
+              ? 'Atualizar Avaliação' 
+              : 'Enviar Avaliação'}
           </Button>
         )}
       </DialogActions>

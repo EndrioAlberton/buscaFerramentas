@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Container, Typography, Link, Grid, Divider } from '@mui/material';
+import { Box, Container, Typography, Link, Grid, Divider, Button } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
+import RateReviewIcon from '@mui/icons-material/RateReview';
 
 export const Footer = () => {
   return (
@@ -78,6 +79,35 @@ export const Footer = () => {
           </Grid>
         </Grid>
         <Divider sx={{ my: 3, backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
+        
+        {/* Seção de Avaliação */}
+        <Box sx={{ textAlign: 'center', mb: 3 }}>
+          <Typography variant="body2" sx={{ mb: 2, opacity: 0.9 }}>
+            Ajude-nos a melhorar! Avalie sua experiência com o EduApps
+          </Typography>
+          <Button
+            variant="contained"
+            href="https://forms.gle/CGXzSiCyW1amHsCb6"
+            target="_blank"
+            rel="noopener noreferrer"
+            startIcon={<RateReviewIcon />}
+            sx={{
+              backgroundColor: '#e6b800',
+              color: '#1f4b6e',
+              fontWeight: 600,
+              px: 4,
+              py: 1.5,
+              '&:hover': {
+                backgroundColor: '#ffcc00',
+                transform: 'scale(1.05)',
+                transition: 'all 0.2s'
+              }
+            }}
+          >
+            Avaliar Plataforma
+          </Button>
+        </Box>
+
         <Typography variant="body2" align="center" sx={{ opacity: 0.8 }}>
           © {new Date().getFullYear()} - Grupo de Estudos e Pesquisa em Educação, Matemática e Tecnologias
         </Typography>
